@@ -1,0 +1,105 @@
+.header {
+    height: 120px;
+    background-color: #f7ecd5;
+}
+
+.header label {
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 64px;
+    font-weight: bold;
+}
+
+.header img {
+    position: relative;
+    width: 140px;
+    top: 50%;
+    transform: translate(0, -50%);
+    margin-left: 30px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+}
+
+.url-input {
+    width: 600px;
+    border-radius: 20px;
+    height: 50px;
+    background-color: #f7ecd5;
+    font-size: 20px;
+}
+
+.form-check-inline {
+    padding: 15px 40px;
+}
+
+.form-actions {
+    margin: 0;
+    background-color: transparent;
+    text-align: center;
+}
+
+.btn {
+    width: 120px;
+    height: 45px;
+    background-color: #f7ecd5;
+    border: none;
+    color: black;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.btn.btn-primary:focus, .btn.btn-primary:hover, .btn.btn-primary:active {
+    background-color: #f7ecd5;
+    outline: 5px solid #ae8b63;
+    color: black;
+}
+
+.url-input:focus, .url-input:hover, .url-input:active {
+    background-color: #f7ecd5;
+    outline: 5px solid #ae8b63;
+    border: none;
+}
+
+.radio {
+    background-color: #f7ecd5;
+}
+
+.radio:focus, .radio:focus, .radio:active, .radio:checked {
+    background-color: #ae8b63;
+    outline: 3px solid #e5b83c;
+    border: none;
+}
+
+i {
+    margin-left: 10px;
+}
+
+.tooltip-inner {
+    background-color: #442f17;
+    box-shadow: 0px 0px 4px black;
+    opacity: 1 !important;
+}
+.tooltip.bs-tooltip-right .tooltip-arrow::before {
+    border-right-color: #442f17 !important;
+}
+.tooltip.bs-tooltip-left .tooltip-arrow::before {
+    border-left-color: #442f17 !important;
+}
+.tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+    border-bottom-color: #442f17 !important;
+}
+.tooltip.bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: #442f17 !important;
+}
