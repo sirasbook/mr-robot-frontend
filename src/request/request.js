@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./request.css"
-import logo from "../logo.png"
 import * as Bootstrap from 'bootstrap'
+import Header from "../components/header";
 
 const Request = () => {
 
@@ -40,10 +40,7 @@ const Request = () => {
 
     return (
         <div>
-            <div className="header">
-                <img src={logo} class="rounded float-start" alt="logo"/>
-                <label>MR. Robot</label>
-            </div>
+            <Header/>
             <div className="container">
                 <form class="was-validate" id="form" onSubmit={handleSubmit}>
                     <div class="form-group">
