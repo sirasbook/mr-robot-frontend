@@ -1,0 +1,22 @@
+.header {
+    height: 120px;
+    background-color: #f7ecd5;
+}
+
+.header label {
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 64px;
+    font-weight: bold;
+}
+
+.header img {
+    position: relative;
+    width: 140px;
+    top: 50%;
+    transform: translate(0, -50%);
+    margin-left: 30px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
