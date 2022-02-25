@@ -1,6 +1,7 @@
 import React from "react";
 import TechnologyStack from "./technology-stack/technology";
 import "./report.css"
+import Leaked from "./leaked-directories/leaked";
 
 const Report = () => {
     return (
@@ -17,6 +18,7 @@ const Report = () => {
                 <h2>Summary</h2>
             </div>
             <TechnologyStack/>
+            <Leaked/>
         </div>
     )
 }
