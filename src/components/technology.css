@@ -1,0 +1,29 @@
+.tech-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 100px;
+    background-color: white;
+    height: 100vw;
+    width: 100vw;
+}
+
+.tech-container thead {
+    background-color: #F7ECD5;
+}
+
+.tech-container tr {
+    border: 2px solid #B9B9B9;
+}
+
+.tech-container th {
+    font-size: 20px;
+}
+
+.tech-container td {
+    width: 500px;
+    font-size: 18px;
+}
+
+.tech-container table {
+    margin-top: 20px;
+}
