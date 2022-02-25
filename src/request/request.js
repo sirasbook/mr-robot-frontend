@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import "./request.css"
+import "./request.scss"
 import * as Bootstrap from 'bootstrap'
 import Header from "../components/header";
 
