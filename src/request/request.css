@@ -6,6 +6,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     font-size: 20px;
+    font-weight: 600;
 }
 
 .request-container .url-input {
@@ -14,6 +15,7 @@
     height: 50px;
     background-color: #f7ecd5;
     font-size: 20px;
+    font-weight: 600;
 }
 
 .request-container .form-check-inline {
@@ -35,6 +37,7 @@
     border-radius: 10px;
     font-size: 20px;
     margin-top: 10px;
+    font-weight: 600;
 }
 
 .request-container .btn.btn-primary:focus, .request-container .btn.btn-primary:hover, .request-container .btn.btn-primary:active {

@@ -7,8 +7,15 @@
     position: relative;
     top: 50%;
     transform: translate(0, -50%);
+}
+
+.header .name {
     font-size: 64px;
     font-weight: bold;
+}
+
+.header .desc {
+    font-size: 64px;
 }
 
 .header img {
