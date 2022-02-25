@@ -1,10 +1,8 @@
 .tech-container {
     display: flex;
     justify-content: space-between;
-    padding: 20px 100px;
+    padding: 30px 100px;
     background-color: white;
-    height: 100vw;
-    width: 100vw;
 }
 
 .tech-container thead {
@@ -16,7 +14,7 @@
 }
 
 .tech-container th {
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .tech-container td {

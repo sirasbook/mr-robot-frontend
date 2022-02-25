@@ -23,6 +23,7 @@ const Request = () => {
 
     const handleChangeUrl = (e) => {
         setUrl(e.target.value)
+        sessionStorage.setItem('url', e.target.value);
     }
 
     const handleClickNormal = (e) => {
