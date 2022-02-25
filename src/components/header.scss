@@ -1,0 +1,29 @@
+.header {
+    height: 120px;
+    background-color: #f7ecd5;
+
+    label {
+        position: relative;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+
+    .name {
+        font-size: 56px;
+        font-weight: bold;
+    }
+
+    .desc {
+        font-size: 56px;
+    }
+
+    img {
+        position: relative;
+        width: 140px;
+        top: 50%;
+        transform: translate(0, -50%);
+        margin-left: 30px;
+        margin-right: 10px;
+        margin-top: 5px;
+    }
+}

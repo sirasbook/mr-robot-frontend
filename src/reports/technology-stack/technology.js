@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import "./technology.css"
+import React from "react";
+import "./technology.scss"
 
 const TechnologyStack = () => {
 
