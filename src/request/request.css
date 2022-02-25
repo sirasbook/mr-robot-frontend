@@ -1,4 +1,4 @@
-.container {
+.request-container {
     display: flex;
     justify-content: center;
     position: absolute;
@@ -8,7 +8,7 @@
     font-size: 20px;
 }
 
-.url-input {
+.request-container .url-input {
     width: 600px;
     border-radius: 20px;
     height: 50px;
@@ -16,17 +16,17 @@
     font-size: 20px;
 }
 
-.form-check-inline {
+.request-container .form-check-inline {
     padding: 15px 40px;
 }
 
-.form-actions {
+.request-container .form-actions {
     margin: 0;
     background-color: transparent;
     text-align: center;
 }
 
-.btn {
+.request-container .btn {
     width: 120px;
     height: 45px;
     background-color: #f7ecd5;
@@ -37,29 +37,29 @@
     margin-top: 10px;
 }
 
-.btn.btn-primary:focus, .btn.btn-primary:hover, .btn.btn-primary:active {
+.request-container .btn.btn-primary:focus, .request-container .btn.btn-primary:hover, .request-container .btn.btn-primary:active {
     background-color: #f7ecd5;
     outline: 5px solid #ae8b63;
     color: black;
 }
 
-.url-input:focus, .url-input:hover, .url-input:active {
+.request-container .url-input:focus, .request-container .url-input:hover, .request-container .url-input:active {
     background-color: #f7ecd5;
     outline: 5px solid #ae8b63;
     border: none;
 }
 
-.radio {
+.request-container .radio {
     background-color: #f7ecd5;
 }
 
-.radio:focus, .radio:focus, .radio:active, .radio:checked {
+.request-container .radio:focus, .request-container .radio:focus, .request-container .radio:active, .radio:checked {
     background-color: #ae8b63;
     outline: 3px solid #e5b83c;
     border: none;
 }
 
-i {
+.request-container i {
     margin-left: 10px;
 }
 

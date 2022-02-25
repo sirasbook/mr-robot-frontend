@@ -41,7 +41,7 @@ const Request = () => {
     return (
         <div>
             <Header/>
-            <div className="container">
+            <div className="request-container">
                 <form class="was-validate" id="form" onSubmit={handleSubmit}>
                     <div class="form-group">
                         <input type="url" class="form-control url-input" id="inputUrl" placeholder="Enter your URL" onChange={handleChangeUrl} required/>
