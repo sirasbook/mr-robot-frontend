@@ -1,6 +1,6 @@
 import React from "react";
 import TechnologyStack from "./technology-stack/technology";
-import "./report.css"
+import "./report.scss"
 import Leaked from "./leaked-directories/leaked";
 
 const Report = () => {
