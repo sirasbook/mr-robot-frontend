@@ -20,7 +20,6 @@ const TechnologyStack = () => {
 
     const displayHead = data.map(
         (info) => {
-
             const displayBody =  Object.values(info)[0].map(
                 (body) => {
                     return (
