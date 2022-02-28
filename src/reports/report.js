@@ -2,6 +2,7 @@ import React from "react";
 import TechnologyStack from "./technology-stack/technology";
 import "./report.scss"
 import Leaked from "./leaked-directories/leaked";
+import Alert from "./alerts-found/alert";
 
 const Report = () => {
     return (
@@ -19,6 +20,7 @@ const Report = () => {
             </div>
             <TechnologyStack/>
             <Leaked/>
+            <Alert/>
         </div>
     )
 }
