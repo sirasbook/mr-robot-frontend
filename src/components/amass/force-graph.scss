@@ -1,0 +1,38 @@
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+
+  width: 100vw;
+  height: 100vh;
+}
+
+svg {
+  width: 100%;
+  align-items: stretch;
+}
+
+.links line {
+  stroke: #999;
+  stroke-opacity: 0.6;
+}
+
+.nodes circle {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+div#grph-tooltip {
+  position: absolute;
+  display: inline-block;
+  padding: 10px;
+  font-family: "Open Sans" sans-serif;
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #999;
+  border-radius: 2px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+}
