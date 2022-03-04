@@ -1,6 +1,8 @@
 import { zoom } from "d3";
 import { scaleOrdinal, schemeCategory10 } from "d3";
 import { drag } from "d3";
+import { zoomIdentity } from "d3";
+import { pointer } from "d3";
 import { select, forceSimulation, forceLink, forceManyBody } from "d3";
 import { forceCollide } from "d3-force";
 import { forceCenter } from "d3-force";
@@ -26,7 +28,6 @@ const useResizeObserver = (ref) => {
 };
 
 const ForceGraph = ({ data }) => {
-  const svgRef = useRef();
   const wrapperRef = useRef();
   const dimension = useResizeObserver(wrapperRef);
 
@@ -35,12 +36,6 @@ const ForceGraph = ({ data }) => {
   useEffect(() => {
     if (!dimension) return;
     const { width, height } = dimension;
-
-    const svg = select(svgRef.current).call(
-      zoom().on("zoom", (event) => {
-        svg.attr("transform", event.transform);
-      })
-    );
 
     const { graph: linkData, labels: nodeData } = graph;
     console.log(linkData, nodeData);
@@ -53,6 +48,7 @@ const ForceGraph = ({ data }) => {
     linkData.forEach((link) => {
       link.source = link.src;
       link.target = link.dst;
+      link.label = link.edgeTitle;
 
       nodeData[link.src].num++;
       nodeData[link.dst].num++;
@@ -86,33 +82,132 @@ const ForceGraph = ({ data }) => {
       return -100 + -300 * nodePercent(d);
     };
 
-    const tooltip = select("#graph-tooltip");
-
-    const dragstarted = (event, d) => {
+    const dragstarted = (event) => {
       if (!event.active) simulation.alphaTarget(0.3).restart();
-      d.fx = d.x;
-      d.fy = d.y;
+      event.subject.fx = transform.invertX(event.subject.x);
+      event.subject.fy = transform.invertY(event.subject.y);
     };
-
-    const dragged = (event, d) => {
-      d.fx = event.x;
-      d.fy = event.y;
+    const dragged = (event) => {
+      event.subject.fx = transform.invertX(event.x);
+      event.subject.fy = transform.invertY(event.y);
     };
-
-    const dragended = (event, d) => {
+    const dragended = (event) => {
       if (!event.active) simulation.alphaTarget(0);
-      d.fx = null;
-      d.fy = null;
+      event.subject.fx = null;
+      event.subject.fy = null;
+    };
+
+    const drawNode = (d) => {
+      const size = nodeRadius(d);
+
+      ctx.beginPath();
+      ctx.fillStyle = color(d.pointColor);
+      ctx.moveTo(d.x, d.y);
+      ctx.arc(d.x, d.y, size, 0, 2 * Math.PI);
+      ctx.strokeStyle = "#333333";
+      ctx.stroke();
+      ctx.fill();
+    };
+
+    const drawEdge = (e) => {
+      const dx = e.target.x - e.source.x;
+      const dy = e.target.y - e.source.y;
+
+      ctx.beginPath();
+      ctx.moveTo(e.source.x, e.source.y);
+      ctx.lineTo(e.target.x, e.target.y);
+      ctx.strokeStyle = "#aaa";
+      ctx.stroke();
+
+      const pad = 1 / 2;
+
+      ctx.save();
+      ctx.textAlign = "center";
+      ctx.translate(e.source.x + dx * pad, e.source.y + dy * pad);
+
+      if (dx < 0) {
+        ctx.rotate(Math.atan2(dy, dx) - Math.PI);
+      } else {
+        ctx.rotate(Math.atan2(dy, dx));
+      }
+      ctx.fillStyle = "#aaa";
+      ctx.fillText(e.label, 0, 0);
+      ctx.restore();
+    };
+
+    const update = () => {
+      ctx.save();
+      ctx.clearRect(0, 0, width, height);
+      ctx.translate(transform.x, transform.y);
+      ctx.scale(transform.k, transform.k);
+
+      linkData.forEach(drawEdge);
+      nodeData.forEach(drawNode);
+
+      if (closeNode) {
+        select("#graph-tooltip")
+          .style("opacity", 0.8)
+          .style("top", transform.applyY(closeNode.y) + 5 + "px")
+          .style("left", transform.applyX(closeNode.x) + 5 + "px")
+          .text(`Domain: ${closeNode.pointLabel}, Source: ${closeNode.source}`);
+      } else {
+        select("#graph-tooltip").style("opacity", 0);
+      }
+
+      ctx.restore();
+    };
+
+    let transform = zoomIdentity;
+
+    const zoomed = (event) => {
+      transform = event.transform;
+      update();
+    };
+
+    const findNode = (x, y) => {
+      const newx = transform.invertX(x);
+      const newy = transform.invertY(y);
+      return nodeData.find((node) => {
+        const radius = nodeRadius(node);
+        const dx = newx - node.x;
+        const dy = newy - node.y;
+        return dx * dx + dy * dy < radius * radius;
+      });
     };
 
     const color = scaleOrdinal(schemeCategory10);
+
+    // Canvas
+    let canvas = document.querySelector(".mainCanvas");
+    if (!canvas) {
+      canvas = select(wrapperRef.current)
+        .append("canvas")
+        .classed("mainCanvas", true)
+        .attr("width", width)
+        .attr("height", height)
+        .node();
+    }
+
+    let closeNode;
+    select(canvas).on("mousemove", (event) => {
+      const p = pointer(event);
+
+      closeNode = findNode(p[0], p[1]);
+      update();
+    });
+
+    const ctx = canvas.getContext("2d");
+
     const simulation = forceSimulation()
+      .nodes(nodeData)
+
       .force(
         "link",
         forceLink()
-          .id((d) => d.id)
+          .links(linkData)
           .distance(nodeLinkDistance)
           .strength(nodeLinkStrength)
+          .id((d) => d.id)
       )
       .force(
         "charge",
@@ -121,61 +216,44 @@ const ForceGraph = ({ data }) => {
           .distanceMax(width * 2)
       )
       .force("collide", forceCollide().radius(nodeCollideRadius))
-      .force("center", forceCenter(width / 2, height / 2));
+      .force("center", forceCenter(width / 2, height / 2))
+      .on("tick", update);
 
-    const link = svg
-      .append("g")
-      .attr("class", "links")
-      .selectAll("line")
-      .data(linkData)
-      .enter()
-      .append("line")
-      .attr("stroke-width", (d) => 2);
+    const dragsubject = (event) => {
+      const node = findNode(event.x, event.y);
+      console.log(node);
 
-    const node = svg
-      .append("g")
-      .attr("class", "nodes")
-      .selectAll("circle")
-      .data(nodeData)
-      .enter()
-      .append("circle")
-      .attr("r", nodeRadius)
-      .attr("fill", (d) => color(d.pointColor))
-      .call(
-        drag().on("start", dragstarted).on("drag", dragged).on("end", dragended)
-      );
+      node.x = transform.applyX(node.x);
+      node.y = transform.applyY(node.y);
 
-    node.on("mousemove", (_, d) => {
-      tooltip.transition().duration(200).style("opacity", 0.9);
-      tooltip.html("test").style("left", `${d.x}px`).style("top", `${d.y}px`);
-    });
-    node.on("mouseout", () => {
-      tooltip.transition().duration(200).style("opacity", 0);
-    });
-
-    const ticked = () => {
-      link
-        .attr("x1", (d) => d.source.x)
-        .attr("y1", (d) => d.source.y)
-        .attr("x2", (d) => d.target.x)
-        .attr("y2", (d) => d.target.y);
-      node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+      return node;
     };
 
-    simulation
-      .nodes(nodeData)
+    select(canvas)
+      .call(
+        drag()
+          .container(canvas)
+          .subject(dragsubject)
+          .on("start", dragstarted)
+          .on("drag", dragged)
+          .on("end", dragended)
+      )
+      .call(
+        zoom()
+          .scaleExtent([1 / 10, 8])
+          .on("zoom", zoomed)
+      );
 
-      .on("tick", ticked);
-    simulation.force("link").links(linkData);
+    update();
 
-    return () => simulation.stop();
+    return () => {
+      simulation.stop();
+    };
   }, [graph, dimension]);
 
   return (
     <>
-      <div className="container" ref={wrapperRef}>
-        <svg ref={svgRef} />
-      </div>
+      <div className="graph-wrapper" ref={wrapperRef}></div>
       <div className="tooltip" id="graph-tooltip" />
     </>
   );
