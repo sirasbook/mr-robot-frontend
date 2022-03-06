@@ -3,6 +3,7 @@ import TechnologyStack from "./technology-stack/technology";
 import "./report.scss"
 import Leaked from "./leaked-directories/leaked";
 import Alert from "./alerts-found/alert";
+import Subdomain from "./subdomains/subdomain";
 
 const Report = () => {
     return (
@@ -19,6 +20,7 @@ const Report = () => {
                 <h2>Summary</h2>
             </div>
             <TechnologyStack/>
+            <Subdomain/>
             <Leaked/>
             <Alert/>
         </div>

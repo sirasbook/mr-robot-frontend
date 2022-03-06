@@ -21,4 +21,13 @@
         padding-left: 140px;
         font-size: 22px;
     }
+
+    a {
+        font-size: 22px;
+        font-weight: 600;
+        color: black;
+        &:hover {
+            color: #ae8b63;
+        }
+    }
 }
