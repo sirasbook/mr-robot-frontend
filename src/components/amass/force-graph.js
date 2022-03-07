@@ -224,6 +224,19 @@ const ForceGraph = ({ data }) => {
       return node;
     };
 
+    const clicked = (event, d) => {
+      if (event.defaultPrevented) return; // drag
+
+      const p = pointer(event);
+
+      const node = findNode(p[0], p[1]);
+      console.log("click", node);
+
+      if (!node) return;
+
+      // TODO: Jump to subdomain detail
+    };
+
     select(canvas)
       .call(
         drag()
@@ -238,6 +251,8 @@ const ForceGraph = ({ data }) => {
           .scaleExtent([1 / 10, 8])
           .on("zoom", zoomed)
       );
+
+    select(canvas).on("click", clicked);
 
     update();
 
