@@ -4,8 +4,7 @@ import { drag } from "d3";
 import { zoomIdentity } from "d3";
 import { pointer } from "d3";
 import { select, forceSimulation, forceLink, forceManyBody } from "d3";
-import { forceCollide } from "d3-force";
-import { forceCenter } from "d3-force";
+import { forceCollide, forceCenter } from "d3-force";
 import React, { useEffect, useRef, useState } from "react";
 
 import "./force-graph.scss";
@@ -29,6 +28,7 @@ const useResizeObserver = (ref) => {
 
 const ForceGraph = ({ data }) => {
   const wrapperRef = useRef();
+  const canvasRef = useRef();
   const dimension = useResizeObserver(wrapperRef);
 
   const [graph, setGraph] = useState(data);
@@ -178,15 +178,10 @@ const ForceGraph = ({ data }) => {
     const color = scaleOrdinal(schemeCategory10);
 
     // Canvas
-    let canvas = document.querySelector(".mainCanvas");
-    if (!canvas) {
-      canvas = select(wrapperRef.current)
-        .append("canvas")
-        .classed("mainCanvas", true)
-        .attr("width", width)
-        .attr("height", height)
-        .node();
-    }
+    const canvas = select(canvasRef.current)
+      .attr("width", width)
+      .attr("height", height)
+      .node();
 
     let closeNode;
     select(canvas).on("mousemove", (event) => {
@@ -253,7 +248,9 @@ const ForceGraph = ({ data }) => {
 
   return (
     <>
-      <div className="graph-wrapper" ref={wrapperRef}></div>
+      <div className="graph-wrapper" ref={wrapperRef}>
+        <canvas ref={canvasRef} className="mainCanvas" />
+      </div>
       <div className="tooltip" id="graph-tooltip" />
     </>
   );
