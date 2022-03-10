@@ -50,13 +50,12 @@ const Subdomain = () => {
   const history = useHistory();
   const location = useLocation();
   const summary = useSummary(data);
-
-  console.log("summary", summary);
+  const domain = data.domains[0];
 
   const [openedDetails, setOpenedDetails] = useState(new Set());
 
-  var c = 0;
-  var d = {};
+  let c = 0;
+  let d = {};
 
   const handleClick = (e) => {
     const name = e.target.text;
@@ -70,8 +69,8 @@ const Subdomain = () => {
   const displaySubdomain = () =>
     data.domains[0].names.map((info) => {
       c += 1;
-      var target = "target" + c;
-      var targetId = "#" + target;
+      let target = "target" + c;
+      let targetId = "#" + target;
 
       if (info.tag in d) {
         d[`${info.tag}`] += 1;
@@ -179,15 +178,16 @@ const Subdomain = () => {
             <p
               style={{
                 fontWeight: `bold`,
+                fontSize: `20px`
               }}
             >
               ASN: {asn} - {info.desc}
             </p>
-            <table className="table">
+            <table className="table summary-table">
               <thead>
                 <tr>
-                  <th>CDIR</th>
-                  <th>Subdomain Name(s)</th>
+                  <th className="left">CDIR</th>
+                  <th className="right">Subdomain Name(s)</th>
                 </tr>
               </thead>
               <tbody>
@@ -195,8 +195,8 @@ const Subdomain = () => {
                   .sort((l, r) => r[1].length - l[1].length)
                   .map(([cidr, addrs]) => (
                     <tr key={cidr}>
-                      <td style={{ textAlign: `center` }}>{cidr}</td>
-                      <td style={{ textAlign: `center` }}>{addrs.length}</td>
+                      <td className="left">{cidr}</td>
+                      <td className="right">{addrs.length}</td>
                     </tr>
                   ))}
               </tbody>
@@ -207,25 +207,32 @@ const Subdomain = () => {
     );
   };
 
-  const showAmount = () => {
-    var tmp = "";
-    var c = 0;
-    for (const [key, val] of Object.entries(d)) {
-      if (c === 0) {
-        tmp = tmp + `\xa0${key}: ${val}`;
-        c++;
-      } else {
-        tmp = tmp + `, ${key}: ${val}`;
-      }
-    }
-    return tmp;
+  const tags = domain.names.reduce((acc, name) => {
+    if (!acc[name.tag]) acc[name.tag] = 0;
+    acc[name.tag]++;
+
+    return acc;
+  }, {});
+
+  const renderTagHead = () => {
+    const keys = Object.keys(tags);
+
+    return (
+      <p>
+        {domain.total} names discovered -{" "}
+        {keys.map((tag, idx) => (
+          <span key={tag}>{`${tag}: ${tags[tag]}${
+            idx < keys.length - 1 ? `, ` : ``
+          }`}</span>
+        ))}
+      </p>
+    );
   };
 
   return (
     <div className="subdomain-container">
       <div className="flex-row total">
-        <p>{data.domains[0].total} names discovered - </p>
-        {showAmount()}
+        {renderTagHead()}
       </div>
       {renderSummary()}
       <h2>Found Subdomains</h2>

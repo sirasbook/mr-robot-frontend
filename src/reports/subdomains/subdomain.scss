@@ -37,6 +37,17 @@
     }
   }
 
+  .summary-table {
+    .left {
+      min-width: 250px;
+      text-align: center;
+    }
+    .right {
+      min-width: 500px;
+      text-align: center;
+    }
+  }
+
   #graph-container {
     position: relative;
     border: 1px solid #c3c3c3;
