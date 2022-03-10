@@ -188,7 +188,7 @@ const Alert = () => {
     )
 
     return (
-        <div className="alert-container">
+        <div className="alert-container" id="alert">
             <h2>Alert summary</h2>
             <table class="table table-borderless">
                 <thead>

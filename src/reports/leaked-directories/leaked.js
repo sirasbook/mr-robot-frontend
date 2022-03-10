@@ -51,7 +51,7 @@ const Leaked = () => {
     )
 
     return (
-        <div className="leaked-container">
+        <div className="leaked-container" id="leaked-dir">
             <h2>Leaked directories and files</h2>
             <table class="table">
                 <thead>

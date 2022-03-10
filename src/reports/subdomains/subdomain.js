@@ -303,7 +303,7 @@ const Subdomain = () => {
     )
 
     return (
-        <div className="subdomain-container">
+        <div className="subdomain-container" id="subdomain">
             <h2>Found Subdomains</h2>
             <p className="total">{data.domains[0].total} names discovered</p>
             {displaySubdomain}
