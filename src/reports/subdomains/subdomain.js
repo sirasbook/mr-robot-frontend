@@ -1,358 +1,276 @@
-import React, { useState }  from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import "./subdomain.scss";
 
+import SubdomainGraph from "../../components/amass/force-graph";
+
+import tempData from "../../data/enum_result.json";
+import graphData from "../../data/data.json";
+
+const useSummary = (data) => {
+  const [state, setState] = useState({});
+
+  useEffect(() => {
+    if (!data) return;
+    const addresses = data.domains[0].names.reduce((addrs, name) => {
+      return [...addrs, ...name.addresses];
+    }, []);
+
+    const summary = addresses.reduce((acc, addr) => {
+      const asn = addr.asn || "unknown";
+
+      if (!acc[asn]) acc[asn] = [addr];
+      else acc[asn] = [...acc[asn], addr];
+
+      return acc;
+    }, {});
+
+    Object.keys(summary).forEach((asn) => {
+      summary[asn] = summary[asn].reduce((acc, addr) => {
+        const cidr = addr.cidr;
+
+        acc.desc = addr.desc;
+        if (!acc.cidr) acc.cidr = {};
+
+        if (!acc.cidr[cidr]) acc.cidr[cidr] = [addr];
+        else acc.cidr[cidr] = [...acc.cidr[cidr], addr];
+
+        return acc;
+      }, {});
+    });
+
+    setState(summary);
+  }, [data]);
+
+  return state;
+};
+
 const Subdomain = () => {
+  const [data, setData] = useState(tempData);
+  const history = useHistory();
+  const location = useLocation();
+  const summary = useSummary(data);
 
-    var c = 0;
-    var d = {}
-    const [domainName, setDomainName] = useState({})
-    var asnDict = [];
-    var i = 0;
-    const [cidr, setCidr] = useState()
+  console.log("summary", summary);
 
-    const data = {
-        events: [
-            {
-                uuid: "50f79a62-b935-4ecf-9635-4769db64ab43",
-                start: "02/22 07:39:30 2022 UTC",
-                finish: "02/22 08:16:51 2022 UTC",
-            },
-        ],
-        domains: [
-            {
-                domain: "discord.com",
-                total: "34",
-                names: [
-                    {
-                        name: "support.discord.com",
-                        domain: "discord.com",
-                        addresses: [
-                        {
-                            ip: "104.16.53.111",
-                            cidr: "104.16.0.0/14",
-                            asn: 13335,
-                            desc: "CLOUDFLARENET - Cloudflare, Inc.",
-                        },
-                        {
-                            ip: "104.16.51.111",
-                            cidr: "104.16.0.0/14",
-                            asn: 13335,
-                            desc: "CLOUDFLARENET - Cloudflare, Inc.",
-                        },
-                        ],
-                        tag: "api",
-                        sources: [
-                        "Crtsh",
-                        "Yahoo",
-                        "BufferOver",
-                        "DuckDuckGo",
-                        "CertSpotter",
-                        "HyperStat",
-                        "RapidDNS",
-                        "Gists",
-                        "Searx",
-                        "AlienVault",
-                        "FullHunt",
-                        "AbuseIPDB",
-                        "ThreatCrowd",
-                        "URLScan",
-                        ],
-                    },
-                    {
-                        name: "blog.discord.com",
-                        domain: "discord.com",
-                        addresses: [
-                        {
-                            ip: "52.4.145.119",
-                            cidr: "52.0.0.0/13",
-                            asn: 14618,
-                            desc: "AMAZON-AES - Amazon.com, Inc.",
-                        },
-                        {
-                            ip: "52.1.147.205",
-                            cidr: "52.0.0.0/13",
-                            asn: 14618,
-                            desc: "AMAZON-AES - Amazon.com, Inc.",
-                        },
-                        {
-                            ip: "52.1.173.203",
-                            cidr: "52.0.0.0/13",
-                            asn: 14618,
-                            desc: "AMAZON-AES - Amazon.com, Inc.",
-                        },
-                        {
-                            ip: "52.4.240.221",
-                            cidr: "52.0.0.0/13",
-                            asn: 14618,
-                            desc: "AMAZON-AES - Amazon.com, Inc.",
-                        },
-                        {
-                            ip: "52.1.119.170",
-                            cidr: "52.0.0.0/13",
-                            asn: 14618,
-                            desc: "AMAZON-AES - Amazon.com, Inc.",
-                        },
-                        {
-                            ip: "52.0.16.118",
-                            cidr: "52.0.0.0/13",
-                            asn: 14618,
-                            desc: "AMAZON-AES - Amazon.com, Inc.",
-                        },
-                        {
-                            ip: "52.4.175.111",
-                            cidr: "52.0.0.0/13",
-                            asn: 14618,
-                            desc: "AMAZON-AES - Amazon.com, Inc.",
-                        },
-                        {
-                            ip: "52.6.3.192",
-                            cidr: "52.0.0.0/13",
-                            asn: 14618,
-                            desc: "AMAZON-AES - Amazon.com, Inc.",
-                        },
-                        {
-                            ip: "52.5.181.79",
-                            cidr: "52.0.0.0/13",
-                            asn: 14618,
-                            desc: "AMAZON-AES - Amazon.com, Inc.",
-                        },
-                        {
-                            ip: "52.6.46.142",
-                            cidr: "52.0.0.0/13",
-                            asn: 14618,
-                            desc: "AMAZON-AES - Amazon.com, Inc.",
-                        },
-                        {
-                            ip: "52.4.225.124",
-                            cidr: "52.0.0.0/13",
-                            asn: 14618,
-                            desc: "AMAZON-AES - Amazon.com, Inc.",
-                        },
-                        {
-                            ip: "52.4.38.70",
-                            cidr: "52.0.0.0/13",
-                            asn: 14618,
-                            desc: "AMAZON-AES - Amazon.com, Inc.",
-                        },
-                        ],
-                        tag: "api",
-                        sources: [
-                        "Crtsh",
-                        "BufferOver",
-                        "DuckDuckGo",
-                        "CertSpotter",
-                        "SonarSearch",
-                        "RapidDNS",
-                        "HackerTarget",
-                        "Gists",
-                        "DNSDumpster",
-                        "Searx",
-                        "AlienVault",
-                        "FullHunt",
-                        "AbuseIPDB",
-                        "ThreatCrowd",
-                        "PKey",
-                        ],
-                    },
-                    {
-                        name: "printer.discord.com",
-                        domain: "discord.com",
-                        addresses: [
-                        {
-                            ip: "162.159.136.232",
-                            cidr: "162.158.0.0/15",
-                            asn: 13335,
-                            desc: "CLOUDFLARENET - Cloudflare, Inc.",
-                        },
-                        {
-                            ip: "162.159.138.232",
-                            cidr: "162.158.0.0/15",
-                            asn: 13335,
-                            desc: "CLOUDFLARENET - Cloudflare, Inc.",
-                        },
-                        {
-                            ip: "162.159.128.233",
-                            cidr: "162.158.0.0/15",
-                            asn: 13335,
-                            desc: "CLOUDFLARENET - Cloudflare, Inc.",
-                        },
-                        {
-                            ip: "162.159.135.232",
-                            cidr: "162.158.0.0/15",
-                            asn: 13335,
-                            desc: "CLOUDFLARENET - Cloudflare, Inc.",
-                        },
-                        {
-                            ip: "162.159.137.232",
-                            cidr: "162.158.0.0/15",
-                            asn: 13335,
-                            desc: "CLOUDFLARENET - Cloudflare, Inc.",
-                        },
-                        ],
-                        tag: "api",
-                        sources: [
-                        "BufferOver",
-                        "SonarSearch",
-                        "RapidDNS",
-                        "HackerTarget",
-                        "DNSDumpster",
-                        "AlienVault",
-                        "AnubisDB",
-                        "FullHunt",
-                        "AbuseIPDB",
-                        "Maltiverse",
-                        "ThreatCrowd",
-                        ],
-                    },
-                    {
-                        name: "crawl-35-237-4-214.ptr.discord.com",
-                        domain: "discord.com",
-                        addresses: [
-                            {
-                                ip: "35.237.4.214",
-                                cidr: "35.237.4.0/24",
-                                desc: "Unknown"
-                            }
-                        ],
-                        tag: "dns",
-                        sources: [
-                            "BufferOver",
-                            "RapidDNS",
-                            "HackerTarget",
-                            "DNSDumpster",
-                            "AnubisDB",
-                            "FullHunt"
-                        ]
-                    },
-                ],
-            },
-        ],
-    };
+  const [openedDetails, setOpenedDetails] = useState(new Set());
 
-    const displaySubdomain = data.domains[0].names.map(
-        (info) => {
-            c += 1;
-            var target = "target" + c;
-            var targetId = "#" + target;
+  var c = 0;
+  var d = {};
 
-            if (info.tag in d) {
-                d[`${info.tag}`] += 1;
-            }else {
-                d[`${info.tag}`] = 1;
-            }
+  const handleClick = (e) => {
+    const name = e.target.text;
+    setOpenedDetails((old) => {
+      const val = new Set(old);
+      if (!val.delete(name)) val.add(name);
+      return val;
+    });
+  };
 
-            const displayData = info.addresses.map(
-                (address) => {
-                    return (
-                        <tr>
-                            <td>{address.ip}</td>
-                            <td>{address.cidr}</td>
-                            <td>{address.desc}</td>
-                        </tr>
-                    )
-                }
-            )
+  const displaySubdomain = () =>
+    data.domains[0].names.map((info) => {
+      c += 1;
+      var target = "target" + c;
+      var targetId = "#" + target;
 
-            const displaySource = info.sources.map(
-                (source) => {
-                    return (
-                        <ul>
-                            <li>{source}</li>
-                        </ul>
-                    )
-                }
-            )
+      if (info.tag in d) {
+        d[`${info.tag}`] += 1;
+      } else {
+        d[`${info.tag}`] = 1;
+      }
 
-            const updateValue = {}
-            if (!(info.name in domainName)) {
-                updateValue[info.name] = true;
+      const displayData = info.addresses.map((address) => {
+        return (
+          <tr>
+            <td>{address.ip}</td>
+            <td>{address.cidr}</td>
+            <td>{address.desc}</td>
+          </tr>
+        );
+      });
 
-                setDomainName({
-                    ...domainName,
-                    ...updateValue
-                })
-            }
+      const displaySource = info.sources.map((source) => {
+        return (
+          <ul>
+            <li>{source}</li>
+          </ul>
+        );
+      });
 
-            const handleClick = (e) => {
-                updateValue[e.target.text] = !domainName[e.target.text];
-
-                setDomainName({
-                    ...domainName,
-                    ...updateValue
-                })
-            }
-
-            return (
-                <div className="each-sub-container">
-                    {domainName[info.name] ? (
-                        <i class="bi bi-caret-down-fill"></i>
-                        ) : (
-                        <i class="bi bi-caret-up-fill"></i>
-                    )}
-                    <a className="collapse-link" data-bs-toggle="collapse" href={targetId} aria-expanded="false" aria-controls={target} onClick={handleClick}>
-                        {info.name}
-                    </a>
-                    <div class="collapse" id={target}>
-                        <div className="subdomain">
-                            <div className="left">
-                                <p><a>Name:</a></p>
-                                <p>Domain:</p>
-                                <p>Tag:</p>
-                                {info.addresses[0].asn !== undefined ? <p>ASN:</p> : null}
-                            </div>
-                            <div className="right">
-                                <p><a href={info.name}>{info.name}</a></p>
-                                <p>{info.domain}</p>
-                                <p>{info.tag}</p>
-                                {info.addresses[0].asn !== undefined ? <p>{info.addresses[0].asn}</p> : null}
-                            </div>
-                        </div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>IP</th> 
-                                    <th>CDIR</th> 
-                                    <th>Description</th> 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {displayData}
-                            </tbody>
-                        </table>
-                        <div className="source">
-                            <p>Sources:</p>
-                            {displaySource}
-                        </div>
-                    </div>
-                </div>
-            )
-        }
-    )
-
-    const showAmount = () => {
-        var tmp = ""
-        var c = 0
-        for (const [key, val] of Object.entries(d)) {
-            if (c === 0) {
-                tmp = tmp + `\xa0${key}: ${val}`
-                c++;
-            }else {
-                tmp = tmp + `, ${key}: ${val}`
-            }
-        }
-        return tmp
-    }
-
-    return (
-        <div className="subdomain-container">
-            <h2>Found Subdomains</h2>
-            <div className="flex-row total">
-                <p>{data.domains[0].total} names discovered - </p>
-                {showAmount()}
+      return (
+        <div className="each-sub-container">
+          {openedDetails.has(info.name) ? (
+            <i className="bi bi-caret-down-fill"></i>
+          ) : (
+            <i className="bi bi-caret-up-fill"></i>
+          )}
+          <a
+            id={info.name}
+            className="collapse-link"
+            data-bs-toggle="collapse"
+            href={targetId}
+            aria-expanded="false"
+            aria-controls={target}
+            onClick={handleClick}
+          >
+            {info.name}
+          </a>
+          <div class="collapse" id={target}>
+            <div className="subdomain">
+              <div className="left">
+                <p>
+                  <a>Name:</a>
+                </p>
+                <p>Domain:</p>
+                <p>Tag:</p>
+                {info.addresses[0].asn !== undefined ? <p>ASN:</p> : null}
+              </div>
+              <div className="right">
+                <p>
+                  <a href={`https://${info.name}`}>{info.name}</a>
+                </p>
+                <p>{info.domain}</p>
+                <p>{info.tag}</p>
+                {info.addresses[0].asn !== undefined ? (
+                  <p>{info.addresses[0].asn}</p>
+                ) : null}
+              </div>
             </div>
-            {displaySubdomain}
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>IP</th>
+                  <th>CDIR</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>{displayData}</tbody>
+            </table>
+            <div className="source">
+              <p>Sources:</p>
+              {displaySource}
+            </div>
+          </div>
         </div>
-    )
+      );
+    });
+
+  const onNodeClick = (_, node) => {
+    // set url to #id
+    history.replace(`${location.pathname}#${node.pointLabel}`);
+
+    // scroll to the element with that id
+    const target = document.getElementById(node.pointLabel);
+    target.scrollIntoView();
+    target.nextElementSibling.classList.add("show");
+
+    setOpenedDetails((old) => {
+      const val = new Set(old);
+      val.add(node.pointLabel);
+      return val;
+    });
+  };
+
+  const renderSummary = () => {
+    return (
+      <>
+        {Object.entries(summary).map(([asn, info]) => (
+          <div key={asn}>
+            <p
+              style={{
+                fontWeight: `bold`,
+              }}
+            >
+              ASN: {asn} - {info.desc}
+            </p>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>CDIR</th>
+                  <th>Subdomain Name(s)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.entries(info.cidr)
+                  .sort((l, r) => r[1].length - l[1].length)
+                  .map(([cidr, addrs]) => (
+                    <tr key={cidr}>
+                      <td style={{ textAlign: `center` }}>{cidr}</td>
+                      <td style={{ textAlign: `center` }}>{addrs.length}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        ))}
+      </>
+    );
+  };
+
+  const showAmount = () => {
+    var tmp = "";
+    var c = 0;
+    for (const [key, val] of Object.entries(d)) {
+      if (c === 0) {
+        tmp = tmp + `\xa0${key}: ${val}`;
+        c++;
+      } else {
+        tmp = tmp + `, ${key}: ${val}`;
+      }
+    }
+    return tmp;
+  };
+
+  return (
+    <div className="subdomain-container">
+      <div className="flex-row total">
+        <p>{data.domains[0].total} names discovered - </p>
+        {showAmount()}
+      </div>
+      {renderSummary()}
+      <h2>Found Subdomains</h2>
+      {/* TODO: Graph */}
+      <div id="graph-container">
+        <SubdomainGraph data={graphData} onNodeClick={onNodeClick} />
+      </div>
+      <h3>Subdomains</h3>
+      {displaySubdomain()}
+    </div>
+  );
+
+  // const domain = data.domains[0];
+
+  // const tags = domain.names.reduce((acc, name) => {
+  //   if (!acc[name.tag]) acc[name.tag] = 0;
+  //   acc[name.tag]++;
+
+  //   return acc;
+  // }, {});
+
+  // const renderTagHead = () => {
+  //   const keys = Object.keys(tags);
+
+  //   return (
+  //     <p>
+  //       {domain.total} names discovered -{" "}
+  //       {keys.map((tag, idx) => (
+  //         <span key={tag}>{`${tag}: ${tags[tag]}${
+  //           idx < keys.length - 1 ? `, ` : ``
+  //         }`}</span>
+  //       ))}
+  //     </p>
+  //   );
+  // };
+
+  // return (
+  //   <div className="subdomain-container">
+  //     <h2>Found Subdomains</h2>
+  //     <div className="flex-row total">{renderTagHead()}</div>
+  //     {/* TODO: Summary */}
+  //     {/* TODO: Graph */}
+  //     <h3>Subdomains</h3>
+  //   </div>
+  // );
 };
 
 export default Subdomain;

@@ -26,7 +26,7 @@ const useResizeObserver = (ref) => {
   return dimension;
 };
 
-const ForceGraph = ({ data }) => {
+const ForceGraph = ({ data, onNodeClick = () => {} }) => {
   const wrapperRef = useRef();
   const canvasRef = useRef();
   const dimension = useResizeObserver(wrapperRef);
@@ -235,6 +235,7 @@ const ForceGraph = ({ data }) => {
       if (!node) return;
 
       // TODO: Jump to subdomain detail
+      onNodeClick(event, node);
     };
 
     select(canvas)
