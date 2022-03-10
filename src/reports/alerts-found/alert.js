@@ -3,6 +3,7 @@ import "./alert.scss";
 
 const Alert = () => {
 
+    var total = 0;
     const data = {
         alerts: [
             {
@@ -106,10 +107,17 @@ const Alert = () => {
 
     const displayAlertSummary = data.alerts.map(
         (info) => {
+            total = total + parseInt(info.count)
             return (
                 <tr>
-                    <td className="center">{info.refid}</td>
-                    <td>{info.name}</td>
+                    <td className="center">
+                        <a href={`https://www.zaproxy.org/docs/alerts/${info.refid}`}>
+                            {info.refid}
+                        </a>
+                    </td>
+                    <td>
+                        <a href={`#${info.name}`}>{info.name}</a>
+                    </td>
                     <td>{info.risk.split('(')[0]}</td>
                     <td className="count">{info.count}</td>
                 </tr>
@@ -121,12 +129,11 @@ const Alert = () => {
         (info) => {
             const displayURL =  info.instances.map(
                 (instance) => {
-                    console.log(instance)
                     return (
                         <tbody>
                             <tr>
                                 <td className="left">URL</td>
-                                <td>{instance.uri}</td>
+                                <td><a href={instance.uri}>{instance.uri}</a></td>
                             </tr>
                             <tr>
                                 <td className="left-sub">Method</td>
@@ -149,8 +156,21 @@ const Alert = () => {
                 }
             )
 
+            const reference = info.reference.split('<p>')
+            for (var i in reference) {
+                reference[i] = reference[i].split('</p>')[0]
+            }
+
+            const renderReference = reference.map(
+                (ref) => {
+                    return (
+                        <tr><a href={ref}>{ref}</a></tr>
+                    )
+                }
+            )
+
             return (
-                <table class="table table-detail">
+                <table class="table table-detail" id={info.name}>
                     <thead>
                         <tr>
                            <th className="risk">{info.risk.split('(')[0]} Risk</th>
@@ -171,15 +191,23 @@ const Alert = () => {
                     <tbody>
                         <tr>
                             <td className="left">Reference</td>
-                            <td>{info.reference.replace( /(<([^>]+)>)/ig, '\n')}</td>
+                            <td>{renderReference}</td>
                         </tr>
                         <tr>
                             <td className="left">CWE ID</td>
-                            <td>{info.cweid}</td>
+                            <td>
+                                <a href={`https://cwe.mitre.org/data/definitions/${info.cweid}.html`}>
+                                    {info.cweid}
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td className="left">Reference ID</td>
-                            <td>{info.refid}</td>
+                            <td>
+                                <a href={`https://www.zaproxy.org/docs/alerts/${info.refid}`}>
+                                    {info.refid}
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -202,10 +230,10 @@ const Alert = () => {
                 <tbody>
                     {displayAlertSummary}
                     <tr>
-                        <td className="total">Total</td>
+                        <td className="total center">Total</td>
                         <td className="total"></td>
                         <td className="total"></td>
-                        <td className="total"></td>
+                        <td className="total">{total}</td>
                     </tr>
                 </tbody>
             </table>

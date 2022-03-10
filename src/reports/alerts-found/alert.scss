@@ -71,4 +71,16 @@
             font-size: 18px;
         }
     }
+    a {
+        color: #442f17;
+        &:hover {
+            color: #ae8b63;
+        }
+    }
+
+    .flex-col {
+        display: flex;
+        flex-direction: column;
+        border: none;
+    }
 }
