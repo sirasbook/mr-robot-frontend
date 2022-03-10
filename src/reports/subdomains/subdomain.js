@@ -5,6 +5,10 @@ const Subdomain = () => {
 
     var c = 0;
     var d = {}
+    const [domainName, setDomainName] = useState({})
+    var asnDict = [];
+    var i = 0;
+    const [cidr, setCidr] = useState()
 
     const data = {
         events: [
@@ -259,10 +263,33 @@ const Subdomain = () => {
                 }
             )
 
+            const updateValue = {}
+            if (!(info.name in domainName)) {
+                updateValue[info.name] = true;
+
+                setDomainName({
+                    ...domainName,
+                    ...updateValue
+                })
+            }
+
+            const handleClick = (e) => {
+                updateValue[e.target.text] = !domainName[e.target.text];
+
+                setDomainName({
+                    ...domainName,
+                    ...updateValue
+                })
+            }
+
             return (
                 <div className="each-sub-container">
-                    <i class="bi bi-caret-down-fill"></i>
-                    <a className="collapse-link" data-bs-toggle="collapse" href={targetId} aria-expanded="false" aria-controls={target}>
+                    {domainName[info.name] ? (
+                        <i class="bi bi-caret-down-fill"></i>
+                        ) : (
+                        <i class="bi bi-caret-up-fill"></i>
+                    )}
+                    <a className="collapse-link" data-bs-toggle="collapse" href={targetId} aria-expanded="false" aria-controls={target} onClick={handleClick}>
                         {info.name}
                     </a>
                     <div class="collapse" id={target}>
@@ -302,10 +329,27 @@ const Subdomain = () => {
         }
     )
 
+    const showAmount = () => {
+        var tmp = ""
+        var c = 0
+        for (const [key, val] of Object.entries(d)) {
+            if (c === 0) {
+                tmp = tmp + `\xa0${key}: ${val}`
+                c++;
+            }else {
+                tmp = tmp + `, ${key}: ${val}`
+            }
+        }
+        return tmp
+    }
+
     return (
         <div className="subdomain-container">
             <h2>Found Subdomains</h2>
-            <p className="total">{data.domains[0].total} names discovered</p>
+            <div className="flex-row total">
+                <p>{data.domains[0].total} names discovered - </p>
+                {showAmount()}
+            </div>
             {displaySubdomain}
         </div>
     )
