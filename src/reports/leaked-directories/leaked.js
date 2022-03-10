@@ -43,7 +43,7 @@ const Leaked = () => {
             return (
                 <tr>
                     <td className="no">{c}</td>
-                    <td>{info.url}</td>
+                    <td><a href={info.url}>{info.url}</a></td>
                     {info.content_type === "" ? <td>N/A</td> : <td>{info.content_type}</td>}
                 </tr>
             )
@@ -53,6 +53,7 @@ const Leaked = () => {
     return (
         <div className="leaked-container" id="leaked-dir">
             <h2>Leaked directories and files</h2>
+            <p className="total">{data.total} Directories / Files founded</p>
             <table class="table">
                 <thead>
                     <tr>
