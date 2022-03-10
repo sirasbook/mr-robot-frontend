@@ -43,7 +43,7 @@ const Leaked = () => {
             return (
                 <tr>
                     <td className="no">{c}</td>
-                    <td>{info.url}</td>
+                    <td><a href={info.url}>{info.url}</a></td>
                     {info.content_type === "" ? <td>N/A</td> : <td>{info.content_type}</td>}
                 </tr>
             )

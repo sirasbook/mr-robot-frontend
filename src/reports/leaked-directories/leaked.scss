@@ -28,4 +28,11 @@
         text-align: center;
         width: 100px;
     }
+
+    a {
+        color: #442f17;
+        &:hover {
+            color: #ae8b63;
+        }
+    }
 }
