@@ -1,67 +1,87 @@
 .subdomain-container {
-    background-color: white;
-    padding: 30px 100px;
+  background-color: white;
+  padding: 30px 100px;
 
-    h2 {
-        font-weight: 600;
-    }
+  h2 {
+    font-weight: 600;
+  }
 
-    .total {
-        font-size: 22px;
+  h3 {
+    font-weight: 500;
+  }
+
+  .total {
+    font-size: 22px;
+    color: red;
+    font-weight: 600;
+  }
+
+  .each-sub-container {
+    margin-top: 20px;
+
+    .subdomain {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      font-size: 20px;
+      font-weight: 600;
+      margin-top: 20px;
+
+      .left {
+        width: 100px;
+      }
+
+      .right {
         color: red;
-        font-weight: 600;
+      }
     }
+  }
 
-    .each-sub-container {
-        margin-top: 20px;
-        
-        .subdomain {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            font-size: 20px;
-            font-weight: 600;
-            margin-top: 20px;
-            
-            .left {
-                width: 100px;
-            }
-    
-            .right {
-                color: red;
-            }
-        }
+  .summary-table {
+    .left {
+      min-width: 250px;
+      text-align: center;
     }
+    .right {
+      min-width: 500px;
+      text-align: center;
+    }
+  }
 
-    thead {
-        background-color: #F7ECD5;
-    }
+  #graph-container {
+    position: relative;
+    border: 1px solid #c3c3c3;
+  }
 
-    th {
-        font-size: 22px;
-        border: 2px solid #B9B9B9;
-    }
+  thead {
+    background-color: #f7ecd5;
+  }
 
-    td {
-        font-size: 20px;
-        border: 2px solid #B9B9B9;
-    }
+  th {
+    font-size: 22px;
+    border: 2px solid #b9b9b9;
+  }
 
-    .source {
-        font-size: 20px;
-        font-weight: 600;
-    }
+  td {
+    font-size: 20px;
+    border: 2px solid #b9b9b9;
+  }
 
-    .collapse-link {
-        font-size: 22px;
-        font-weight: 600;
-        color: black;
-        &:hover {
-            color: #ae8b63;
-        }
-    }
+  .source {
+    font-size: 20px;
+    font-weight: 600;
+  }
 
-    i {
-        margin-right: 5px;
+  .collapse-link {
+    font-size: 22px;
+    font-weight: 600;
+    color: black;
+    &:hover {
+      color: #ae8b63;
     }
+  }
+
+  i {
+    margin-right: 5px;
+  }
 }
