@@ -231,11 +231,11 @@ const Subdomain = () => {
 
   return (
     <div className="subdomain-container" id="subdomain">
+      <h2>Found Subdomains</h2>
       <div className="flex-row total">
         {renderTagHead()}
       </div>
       {renderSummary()}
-      <h2>Found Subdomains</h2>
       {/* TODO: Graph */}
       <div id="graph-container">
         <SubdomainGraph data={graphData} onNodeClick={onNodeClick} />
