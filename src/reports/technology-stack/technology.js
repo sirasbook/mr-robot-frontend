@@ -1,178 +1,41 @@
 import React, { useState } from "react";
 import "./technology.scss"
+import tempData from "../../data/technology_data.json";
 
 const TechnologyStack = () => {
+    const [data, setData] = useState(tempData);
+    let c = 0;
 
-    const tableHead = new Set();
-
-    const data = {
-        urls: {
-            "https://classdeedee.cloud.cp.eng.chula.ac.th/": {
-                status: 200,
-            },
-        },
-        technologies: [
-            {
-                slug: "node-js",
-                name: "Node.js",
-                confidence: 100,
-                version: null,
-                icon: "node.js.png",
-                website: "http://nodejs.org",
-                cpe: "cpe:/a:nodejs:node.js",
-                categories: [
-                    {
-                        id: 27,
-                        slug: "programming-languages",
-                        name: "Programming languages",
-                    },
-                ],
-            },
-            {
-                slug: "ant-design",
-                name: "Ant Design",
-                confidence: 100,
-                version: null,
-                icon: "Ant Design.svg",
-                website: "https://ant.design",
-                cpe: null,
-                categories: [
-                    {
-                        id: 66,
-                        slug: "ui-frameworks",
-                        name: "UI frameworks",
-                    },
-                ],
-            },
-            {
-                slug: "nginx",
-                name: "Nginx",
-                confidence: 100,
-                version: null,
-                icon: "Nginx.svg",
-                website: "http://nginx.org/en",
-                cpe: "cpe:/a:nginx:nginx",
-                categories: [
-                    {
-                        id: 22,
-                        slug: "web-servers",
-                        name: "Web servers",
-                    },
-                    {
-                        id: 64,
-                        slug: "reverse-proxies",
-                        name: "Reverse proxies",
-                    },
-                ],
-            },
-            {
-                slug: "react",
-                name: "React",
-                confidence: 100,
-                version: null,
-                icon: "React.png",
-                website: "https://reactjs.org",
-                cpe: "cpe:/a:facebook:react",
-                categories: [
-                    {
-                        id: 12,
-                        slug: "javascript-frameworks",
-                        name: "JavaScript frameworks",
-                    },
-                ],
-            },
-            {
-                slug: "openresty",
-                name: "OpenResty",
-                confidence: 100,
-                version: "1.15.8.1",
-                icon: "OpenResty.png",
-                website: "http://openresty.org",
-                cpe: null,
-                categories: [
-                    {
-                        id: 22,
-                        slug: "web-servers",
-                        name: "Web servers",
-                    },
-                ],
-            },
-            {
-                slug: "next-js",
-                name: "Next.js",
-                confidence: 100,
-                version: null,
-                icon: "vercel.svg",
-                website: "https://nextjs.org",
-                cpe: "cpe:/a:zeit:next.js",
-                categories: [
-                    {
-                        id: 18,
-                        slug: "web-frameworks",
-                        name: "Web frameworks",
-                    },
-                    {
-                        id: 22,
-                        slug: "web-servers",
-                        name: "Web servers",
-                    },
-                ],
-            },
-            {
-                slug: "webpack",
-                name: "webpack",
-                confidence: 100,
-                version: null,
-                icon: "webpack.svg",
-                website: "https://webpack.js.org/",
-                cpe: null,
-                    categories: [
-                        {
-                            id: 19,
-                            slug: "miscellaneous",
-                            name: "Miscellaneous",
-                        },
-                    ],
-            },
-        ],
-    };
-
-    const displayData = data.technologies.map(
+    const displayData = data.map(
         (info) => {
+            c += 1;
 
-            const displayBody = info.categories.map(
+            const displayBody = info.data.map(
                 (body) => {
-                    if (document.getElementById(`${body.name}`) !== null) {
-                        var tableRef = document.getElementById(`${body.name}`)
-                        tableRef.insertRow().innerHTML = 
-                        "<td>" + `${info.name}` + "</td>"
-                    }
-                }
-            )
-
-            const displayHead =  info.categories.map(
-                (body) => {
-                    if (tableHead.has(body.name) === false) {
-                        tableHead.add(body.name)
-                        return (
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <td>{body.name}</td>
-                                    </tr>
-                                </thead>
-                                <tbody id={body.name}>
-                                    {displayBody}
-                                </tbody>
-                            </table>
-                        )
-                    }
+                    return (
+                        <tr>
+                            <td>
+                                <a href={`https://www.wappalyzer.com/technologies/${info.slug}/${body.slug}`}>
+                                    {body.name}
+                                </a>
+                            </td>
+                        </tr>
+                    )
                 }
             )
 
             return (
                 <div>
-                    {displayHead}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>{info.name}</th>
+                            </tr>
+                        </thead>
+                        <tbody id={info.name}>
+                            {displayBody}
+                        </tbody>
+                    </table>
                 </div>
             )
         }
@@ -180,9 +43,11 @@ const TechnologyStack = () => {
 
     return (
         <div className="tech-container" id="technology">
-            <div className="left">
+            <div className="flex-col">
                 <h2>Technology-stack used by the provided website</h2>
-                {displayData}
+                <div className="contain">
+                    {displayData}
+                </div>
             </div>
         </div>
     )
