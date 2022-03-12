@@ -6,6 +6,7 @@
 
     table {
         margin-top: 20px;
+        width: 40vw;
     }
 
     thead {
@@ -26,5 +27,18 @@
 
     h2 {
         font-weight: 600;
+    }
+
+    a {
+        color: #442f17;
+        &:hover {
+            color: #ae8b63;
+        }
+    }
+
+    .contain {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
 }
