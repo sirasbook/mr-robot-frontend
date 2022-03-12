@@ -179,7 +179,7 @@ const TechnologyStack = () => {
     )
 
     return (
-        <div className="tech-container">
+        <div className="tech-container" id="technology">
             <div className="left">
                 <h2>Technology-stack used by the provided website</h2>
                 {displayData}
