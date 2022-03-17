@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { useQuery } from "react-query";
 import "./subdomain.scss";
 
 import SubdomainGraph from "../../components/amass/force-graph";
-
-import tempData from "../../data/enum_result.json";
-import graphData from "../../data/data.json";
 
 const useSummary = (data) => {
   const [state, setState] = useState({});
@@ -46,16 +44,40 @@ const useSummary = (data) => {
 };
 
 const Subdomain = () => {
-  const [data, setData] = useState(tempData);
   const history = useHistory();
   const location = useLocation();
-  const summary = useSummary(data);
-  const domain = data.domains[0];
+
+  // TODO: replace "domain" to domain that use for this query
+  const enumQuery = useQuery(["enum", "domain"], () => {
+    return fetch("http://localhost:8000/api/service/amass/db/latest").then(
+      (res) => res.json()
+    );
+  });
+
+  const enumData = enumQuery?.data;
+
+  const domainName = enumData?.domains[0].domain;
+
+  const summary = useSummary(enumData);
 
   const [openedDetails, setOpenedDetails] = useState(new Set());
 
-  let c = 0;
-  let d = {};
+  const graphQuery = useQuery(
+    ["graph", domainName],
+    async () => {
+      return fetch(
+        `http://localhost/api/service/amass/viz/graphistry?domain=${domainName}`
+      ).then((res) => res.json());
+    },
+    {
+      enabled: !!domainName,
+    }
+  );
+
+  // Loading
+  if (enumQuery.isLoading || graphQuery.isLoading) {
+    return <div> Test is Loading...</div>;
+  }
 
   const handleClick = (e) => {
     const name = e.target.text;
@@ -67,17 +89,8 @@ const Subdomain = () => {
   };
 
   const displaySubdomain = () =>
-    data.domains[0].names.map((info) => {
-      c += 1;
-      let target = "target" + c;
-      let targetId = "#" + target;
-
-      if (info.tag in d) {
-        d[`${info.tag}`] += 1;
-      } else {
-        d[`${info.tag}`] = 1;
-      }
-
+    enumData.domains[0].names.map((info, idx) => {
+      const target = `target-collapse${idx}`;
       const displayData = info.addresses.map((address) => {
         return (
           <tr>
@@ -107,7 +120,7 @@ const Subdomain = () => {
             id={info.name}
             className="collapse-link"
             data-bs-toggle="collapse"
-            href={targetId}
+            href={`#${target}`}
             aria-expanded="false"
             aria-controls={target}
             onClick={handleClick}
@@ -135,7 +148,7 @@ const Subdomain = () => {
                 ) : null}
               </div>
             </div>
-            <table class="table">
+            <table className="table">
               <thead>
                 <tr>
                   <th>IP</th>
@@ -160,6 +173,12 @@ const Subdomain = () => {
 
     // scroll to the element with that id
     const target = document.getElementById(node.pointLabel);
+
+    // probably not exist in list
+    if (!target) {
+      alert("The target domain might not exist in the list");
+    }
+
     target.scrollIntoView();
     target.nextElementSibling.classList.add("show");
 
@@ -178,7 +197,7 @@ const Subdomain = () => {
             <p
               style={{
                 fontWeight: `bold`,
-                fontSize: `20px`
+                fontSize: `20px`,
               }}
             >
               ASN: {asn} - {info.desc}
@@ -207,7 +226,7 @@ const Subdomain = () => {
     );
   };
 
-  const tags = domain.names.reduce((acc, name) => {
+  const tags = enumData?.domains[0].names.reduce((acc, name) => {
     if (!acc[name.tag]) acc[name.tag] = 0;
     acc[name.tag]++;
 
@@ -216,6 +235,7 @@ const Subdomain = () => {
 
   const renderTagHead = () => {
     const keys = Object.keys(tags);
+    const domain = enumData.domains[0];
 
     return (
       <p>
@@ -232,52 +252,18 @@ const Subdomain = () => {
   return (
     <div className="subdomain-container" id="subdomain">
       <h2>Found Subdomains</h2>
-      <div className="flex-row total">
-        {renderTagHead()}
-      </div>
+      <div className="flex-row total">{renderTagHead()}</div>
       {renderSummary()}
-      {/* TODO: Graph */}
       <div id="graph-container">
-        <SubdomainGraph data={graphData} onNodeClick={onNodeClick} />
+        <SubdomainGraph
+          data={graphQuery.data.gResult}
+          onNodeClick={onNodeClick}
+        />
       </div>
       <h3>Subdomains</h3>
       {displaySubdomain()}
     </div>
   );
-
-  // const domain = data.domains[0];
-
-  // const tags = domain.names.reduce((acc, name) => {
-  //   if (!acc[name.tag]) acc[name.tag] = 0;
-  //   acc[name.tag]++;
-
-  //   return acc;
-  // }, {});
-
-  // const renderTagHead = () => {
-  //   const keys = Object.keys(tags);
-
-  //   return (
-  //     <p>
-  //       {domain.total} names discovered -{" "}
-  //       {keys.map((tag, idx) => (
-  //         <span key={tag}>{`${tag}: ${tags[tag]}${
-  //           idx < keys.length - 1 ? `, ` : ``
-  //         }`}</span>
-  //       ))}
-  //     </p>
-  //   );
-  // };
-
-  // return (
-  //   <div className="subdomain-container">
-  //     <h2>Found Subdomains</h2>
-  //     <div className="flex-row total">{renderTagHead()}</div>
-  //     {/* TODO: Summary */}
-  //     {/* TODO: Graph */}
-  //     <h3>Subdomains</h3>
-  //   </div>
-  // );
 };
 
 export default Subdomain;

@@ -31,7 +31,7 @@ const ForceGraph = ({ data, onNodeClick = () => {} }) => {
   const canvasRef = useRef();
   const dimension = useResizeObserver(wrapperRef);
 
-  const [graph, setGraph] = useState(data);
+  const [graph] = useState(data);
 
   useEffect(() => {
     if (!dimension) return;
