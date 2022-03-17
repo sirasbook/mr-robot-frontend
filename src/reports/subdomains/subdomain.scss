@@ -76,7 +76,10 @@
   .collapse-link {
     font-size: 22px;
     font-weight: 600;
-    color: black;
+  }
+
+  a{
+    color: #442f17;
     &:hover {
       color: #ae8b63;
     }
