@@ -4,6 +4,7 @@ import "./report.scss"
 import Leaked from "./leaked-directories/leaked";
 import Alert from "./alerts-found/alert";
 import Subdomain from "./subdomains/subdomain";
+import Port from "./port/port";
 
 const Report = () => {
     return (
@@ -19,6 +20,7 @@ const Report = () => {
                 <li><a href="#alert">Alert founded</a></li>
                 {/* <h2 id="summary">Summary</h2> */}
             </div>
+            <Port/>
             <TechnologyStack/>
             <Subdomain/>
             <Leaked/>
