@@ -13,7 +13,7 @@ const Report = () => {
                 <h1>Summary of Scanning Result</h1>
                 <h2>Domain: {sessionStorage.getItem('url')}</h2>
                 <h2>This summary include:</h2>
-                {/* <li><a href="#summary">Summary</a></li> */}
+                <li><a href="#port">Port founded</a></li>
                 <li><a href="#technology">Technology-stack</a></li>
                 <li><a href="#subdomain">Subdomains</a></li>
                 <li><a href="#leaked-dir">Leaked directory</a></li>
