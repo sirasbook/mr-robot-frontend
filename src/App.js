@@ -8,7 +8,14 @@ import ForceGraph from "./components/amass/force-graph";
 
 import data from "./data/data.json";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function App() {
   const history = useHistory();

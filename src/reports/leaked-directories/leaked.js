@@ -1,54 +1,43 @@
 import React from "react";
-import "./leaked.scss"
+import { useQuery } from "react-query";
+import { FadeLoader } from "react-spinners";
+import "./leaked.scss";
 
 const Leaked = () => {
+    const url = sessionStorage.getItem("url");
+    const query = useQuery(["ffuf", url], () => {
+        return fetch("http://localhost/api/service/ffuf/scan", {
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                url: `${url}`
+            })
+        }).then((res) => res.json());
+    });
 
-    const data = {
-        message: "Directories / Files found by fuzzing",
-        total: 16,
-        data: [
-            {
-                url: "https://www.reg.chula.ac.th/download",
-                "content_type": "text/html;charset=UTF-8",
-            },
-            {
-                url: "https://www.reg.chula.ac.th/icons/README",
-                "content_type": "",
-            },
-            {
-                url: "https://www.reg.chula.ac.th/images",
-                "content_type": "text/html;charset=UTF-8",
-            },
-            {
-                url: "https://www.reg.chula.ac.th/index.html",
-                "content_type": "text/html",
-            },
-            {
-                url: "https://www.reg.chula.ac.th/includes/",
-                "content_type": "text/html;charset=UTF-8",
-            },
-            {
-                url: "https://www.reg.chula.ac.th/includes",
-                "content_type": "text/html;charset=UTF-8",
-            },
-        ],
-    };
+    if (query.isLoading) {
+        return <div className="leaked-container" id="leaked-dir">
+            <h2>Leaked directories and files</h2>
+            <FadeLoader color={'#F7ECD5'} loading={query.isLoading} size={100} children={ <p>Loading...</p> } />
+        </div>    }
 
-    var c = 0;
+    const { data } = query;
+    const displayBody = data?.data.map((info, idx) => {
+        console.log(info.url);
+        return (
+            <tr>
+                <td className="no">{idx}</td>
+                <td>
+                    <a href={info.url}>{info.url}</a>
+                </td>
+                {info.content_type === "" ? <td>N/A</td> : <td>{info.content_type}</td>}
+            </tr>
+        );
+    });
 
-    const displayBody = data.data.map(
-        (info) => {
-            console.log(info.url)
-            c += 1
-            return (
-                <tr>
-                    <td className="no">{c}</td>
-                    <td><a href={info.url}>{info.url}</a></td>
-                    {info.content_type === "" ? <td>N/A</td> : <td>{info.content_type}</td>}
-                </tr>
-            )
-        }
-    )
 
     return (
         <div className="leaked-container" id="leaked-dir">
@@ -58,16 +47,14 @@ const Leaked = () => {
                 <thead>
                     <tr>
                         <th className="no">No.</th>
-                        <th>Directory / File</th> 
-                        <th>Content Type</th> 
+                        <th>Directory / File</th>
+                        <th>Content Type</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {displayBody}
-                </tbody>
+                <tbody>{displayBody}</tbody>
             </table>
         </div>
-    )
-}
+    );
+};
 
 export default Leaked;

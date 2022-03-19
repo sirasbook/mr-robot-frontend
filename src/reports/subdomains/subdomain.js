@@ -48,7 +48,8 @@ const Subdomain = () => {
   const location = useLocation();
 
   // TODO: replace "domain" to domain that use for this query
-  const enumQuery = useQuery(["enum", "domain"], () => {
+  const url = sessionStorage.getItem("url")
+  const enumQuery = useQuery(["enum", url], () => {
     return fetch("http://localhost:8000/api/service/amass/db/latest").then(
       (res) => res.json()
     );
