@@ -1,9 +1,15 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useQuery } from "react-query";
 import "./subdomain.scss";
 
 import SubdomainGraph from "../../components/amass/force-graph";
+import { ClipLoader } from "react-spinners";
+import {
+  fetchEnumData,
+  fetchGraphEnumData,
+  fetchLatestEnumData,
+} from "../../utils/fetcher";
 
 const useSummary = (data) => {
   const [state, setState] = useState({});
@@ -47,15 +53,21 @@ const Subdomain = () => {
   const history = useHistory();
   const location = useLocation();
 
-  // TODO: replace "domain" to domain that use for this query
-  const url = sessionStorage.getItem("url")
-  const enumQuery = useQuery(["enum", url], () => {
-    return fetch("http://localhost:8000/api/service/amass/db/latest").then(
-      (res) => res.json()
-    );
+  const url = sessionStorage.getItem("url");
+
+  // 1. Perform enumeration on input domain
+  const enumQuery = useQuery(["enum", url], fetchEnumData, {
+    enabled: true,
   });
 
-  const enumData = enumQuery?.data;
+  // 2. Retrieve latest enumeration data
+  const latestEnumQuery = useQuery(["latest-enum", url], fetchLatestEnumData, {
+    enabled: !!enumQuery.isFetched,
+  });
+
+  // 3. Retrieve graph data of the latest enumeration data
+
+  const enumData = latestEnumQuery?.data;
 
   const domainName = enumData?.domains[0].domain;
 
@@ -63,21 +75,33 @@ const Subdomain = () => {
 
   const [openedDetails, setOpenedDetails] = useState(new Set());
 
-  const graphQuery = useQuery(
-    ["graph", domainName],
-    async () => {
-      return fetch(
-        `http://localhost/api/service/amass/viz/graphistry?domain=${domainName}`
-      ).then((res) => res.json());
-    },
-    {
-      enabled: !!domainName,
-    }
-  );
+  const graphQuery = useQuery(["graph", domainName], fetchGraphEnumData, {
+    enabled: !!domainName,
+  });
 
   // Loading
-  if (enumQuery.isLoading || graphQuery.isLoading) {
-    return <div> Test is Loading...</div>;
+  if (
+    enumQuery.isLoading ||
+    latestEnumQuery.isLoading ||
+    graphQuery.isLoading
+  ) {
+    return (
+      <div className="subdomain-container" id="subdomain">
+        <h2>Found Subdomains</h2>
+        <ClipLoader />
+        <h3>Subdomains</h3>
+        <ClipLoader />
+      </div>
+    );
+  }
+
+  if (enumQuery.error || latestEnumQuery.error || graphQuery.error) {
+    return (
+      <div className="subdomain-container" id="subdomain">
+        <h2>Found Subdomains</h2>
+        <p className="error">Error!!!</p>
+      </div>
+    );
   }
 
   const handleClick = (e) => {
