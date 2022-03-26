@@ -5,8 +5,8 @@ import "./leaked.scss";
 
 const Leaked = () => {
   const url = sessionStorage.getItem("url");
-  const query = useQuery(["ffuf", url], () => {
-    return fetch("http://localhost/api/service/ffuf/scan", {
+  const query = useQuery(["ffuf", url], async () => {
+    const res = await fetch("http://localhost/api/service/ffuf/scan", {
       headers: {
         Accept: "application/json",
         "Content-type": "application/json",
@@ -15,7 +15,13 @@ const Leaked = () => {
       body: JSON.stringify({
         url: `${url}`,
       }),
-    }).then((res) => res.json());
+    });
+
+    if (!res.ok) {
+      throw new Error("ffuf-service error!!");
+    }
+
+    return res.json();
   });
 
   if (query.isLoading) {
@@ -37,7 +43,7 @@ const Leaked = () => {
   }
 
   const { data } = query;
-  const displayBody = data?.data.map((info, idx) => {
+  const displayBody = data?.data?.map((info, idx) => {
     console.log(info.url);
     return (
       <tr>
@@ -54,7 +60,7 @@ const Leaked = () => {
     <div className="leaked-container" id="leaked-dir">
       <h2>Leaked directories and files</h2>
       <p className="total">{data.total} Directories / Files founded</p>
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>
             <th className="no">No.</th>

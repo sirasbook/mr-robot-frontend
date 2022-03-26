@@ -55,7 +55,7 @@ const TechnologyStack = () => {
       check.add(info.id);
       return (
         <div>
-          <table class="table">
+          <table className="table">
             <thead>
               <tr>
                 <th>{info.name}</th>

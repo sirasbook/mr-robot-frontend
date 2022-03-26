@@ -9,12 +9,12 @@ const Alert = () => {
 
   const url = sessionStorage.getItem("url");
   const option = sessionStorage.getItem("zap-option");
-  const { isLoading, data, error } = useQuery(
+  const { isLoading, isFetching, data, error } = useQuery(
     ["zap", url, option],
     fetchZAPData
   );
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
       <div className="alert-container" id="alert">
         <h2>Alert summary</h2>
@@ -32,7 +32,7 @@ const Alert = () => {
     );
   }
 
-  const displayAlertSummary = data.alerts.map((info) => {
+  const displayAlertSummary = data?.alerts?.map((info) => {
     total = total + parseInt(info.count);
     return (
       <tr>
@@ -50,7 +50,7 @@ const Alert = () => {
     );
   });
 
-  const displayAlertDetail = data.alerts.map((info) => {
+  const displayAlertDetail = data?.alerts?.map((info) => {
     const displayURL = info.instances.map((instance) => {
       return (
         <tbody>
@@ -94,7 +94,7 @@ const Alert = () => {
     });
 
     return (
-      <table class="table table-detail" id={info.name}>
+      <table className="table table-detail" id={info.name}>
         <thead>
           <tr>
             <th className="risk">{info.risk.split("(")[0]} Risk</th>
@@ -143,7 +143,7 @@ const Alert = () => {
   return (
     <div className="alert-container" id="alert">
       <h2>Alert summary</h2>
-      <table class="table table-borderless">
+      <table className="table table-borderless">
         <thead>
           <tr>
             <th className="center">Reference ID</th>

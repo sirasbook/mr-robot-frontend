@@ -3,6 +3,8 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useQuery } from "react-query";
 import "./subdomain.scss";
 
+import psl from "psl";
+
 import SubdomainGraph from "../../components/amass/force-graph";
 import { ClipLoader } from "react-spinners";
 import {
@@ -53,56 +55,11 @@ const Subdomain = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const url = sessionStorage.getItem("url");
+  const url = sessionStorage.getItem("url")?.replace(/^https?:\/\//, "");
 
-  // 1. Perform enumeration on input domain
-  const enumQuery = useQuery(["enum", url], fetchEnumData, {
-    enabled: true,
-  });
-
-  // 2. Retrieve latest enumeration data
-  const latestEnumQuery = useQuery(["latest-enum", url], fetchLatestEnumData, {
-    enabled: !!enumQuery.isFetched,
-  });
-
-  // 3. Retrieve graph data of the latest enumeration data
-
-  const enumData = latestEnumQuery?.data;
-
-  const domainName = enumData?.domains[0].domain;
-
-  const summary = useSummary(enumData);
-
-  const [openedDetails, setOpenedDetails] = useState(new Set());
-
-  const graphQuery = useQuery(["graph", domainName], fetchGraphEnumData, {
-    enabled: !!domainName,
-  });
-
-  // Loading
-  if (
-    enumQuery.isLoading ||
-    latestEnumQuery.isLoading ||
-    graphQuery.isLoading
-  ) {
-    return (
-      <div className="subdomain-container" id="subdomain">
-        <h2>Found Subdomains</h2>
-        <ClipLoader />
-        <h3>Subdomains</h3>
-        <ClipLoader />
-      </div>
-    );
-  }
-
-  if (enumQuery.error || latestEnumQuery.error || graphQuery.error) {
-    return (
-      <div className="subdomain-container" id="subdomain">
-        <h2>Found Subdomains</h2>
-        <p className="error">Error!!!</p>
-      </div>
-    );
-  }
+  // Extract domain name from url
+  const domain = psl.get(url);
+  console.log("domain", domain);
 
   const handleClick = (e) => {
     const name = e.target.text;
@@ -113,12 +70,91 @@ const Subdomain = () => {
     });
   };
 
-  const displaySubdomain = () =>
-    enumData.domains[0].names.map((info, idx) => {
+  // 1. Perform enumeration on input domain
+  const enumQuery = useQuery(["enum", url], fetchEnumData);
+
+  // 2. Retrieve latest enumeration data
+  const latestEnumQuery = useQuery(
+    ["latest-enum", domain],
+    fetchLatestEnumData,
+    {
+      enabled: !!enumQuery.isFetched,
+    }
+  );
+
+  // 3. Retrieve graph data of the latest enumeration data
+  const [openedDetails, setOpenedDetails] = useState(new Set());
+
+  const enumData = latestEnumQuery?.data;
+
+  const summary = useSummary(enumData);
+
+  const graphQuery = useQuery(["graph", domain], fetchGraphEnumData, {
+    enabled: !!enumData,
+  });
+
+  const isLoading = [
+    enumQuery.isLoading,
+    latestEnumQuery.isLoading,
+    graphQuery.isLoading,
+  ].some(Boolean);
+
+  const isFetching = [
+    enumQuery.isFetching,
+    latestEnumQuery.isFetching,
+    graphQuery.isFetching,
+  ].some(Boolean);
+
+  const isError = [
+    enumQuery.isError,
+    latestEnumQuery.isError,
+    graphQuery.isError,
+    !domain,
+  ].some(Boolean);
+
+  if (isLoading || isFetching) {
+    if (enumQuery.isLoading || enumQuery.isFetching)
+      return (
+        <div className="subdomain-container" id="subdomain">
+          <h2>Found Subdomains</h2>
+          <p>Enumerating...</p>
+          <div className="loading">
+            <ClipLoader />
+          </div>
+        </div>
+      );
+    if (
+      latestEnumQuery.isLoading ||
+      latestEnumQuery.isFetching ||
+      graphQuery.isLoading ||
+      graphQuery.isFetching
+    )
+      return (
+        <div className="subdomain-container" id="subdomain">
+          <h2>Found Subdomains</h2>
+          <p>Fetching Result...</p>
+          <div className="loading">
+            <ClipLoader />
+          </div>
+        </div>
+      );
+  }
+
+  if (isError) {
+    return (
+      <div className="subdomain-container" id="subdomain">
+        <h2>Found Subdomains</h2>
+        <p className="error">Fail with error</p>
+      </div>
+    );
+  }
+
+  const renderSubdomain = () =>
+    enumData?.domains[0].names.map((info, idx) => {
       const target = `target-collapse${idx}`;
       const displayData = info.addresses.map((address) => {
         return (
-          <tr>
+          <tr key={address.ip}>
             <td>{address.ip}</td>
             <td>{address.cidr}</td>
             <td>{address.desc}</td>
@@ -152,7 +188,7 @@ const Subdomain = () => {
           >
             {info.name}
           </a>
-          <div class="collapse" id={target}>
+          <div className="collapse" id={target}>
             <div className="subdomain">
               <div className="left">
                 <p>
@@ -259,8 +295,10 @@ const Subdomain = () => {
   }, {});
 
   const renderTagHead = () => {
+    if (!tags) return;
+
     const keys = Object.keys(tags);
-    const domain = enumData.domains[0];
+    const domain = enumData?.domains[0];
 
     return (
       <p>
@@ -276,7 +314,7 @@ const Subdomain = () => {
 
   return (
     <div className="subdomain-container" id="subdomain">
-      <h2>Found Subdomains</h2>
+      <h2>Found Subdomains</h2>{" "}
       <div className="flex-row total">{renderTagHead()}</div>
       {renderSummary()}
       <div id="graph-container">
@@ -286,7 +324,7 @@ const Subdomain = () => {
         />
       </div>
       <h3>Subdomains</h3>
-      {displaySubdomain()}
+      {renderSubdomain()}
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import enumTempData from "../data/enum_result.json";
+
 // WAPP
 export const fetchWAPPData = async ({ queryKey: key }) => {
   const url = key[key.length - 1];
@@ -11,8 +13,8 @@ export const fetchWAPPData = async ({ queryKey: key }) => {
 
 // Amass
 export const fetchEnumData = async ({ queryKey: key }) => {
-  const url = key[key.length - 1];
-  return fetch(`http://localhost/api/service/amass/enum`, {
+  const url = key[1];
+  const res = await fetch(`http://localhost/api/service/amass/enum`, {
     headers: {
       Accept: "application/json",
       "Content-type": "application/json",
@@ -22,24 +24,36 @@ export const fetchEnumData = async ({ queryKey: key }) => {
       domain: `${url}`,
       config: {
         mode: 0,
-        timeout: 3,
+        timeout: 5,
       },
     }),
-  }).then((res) => res.json());
+  });
+
+  if (!res.ok) throw new Error("Fail to enumerate the url");
+
+  return res.json();
+
+  // return enumTempData;
 };
 
 export const fetchLatestEnumData = async ({ queryKey: key }) => {
   const domain = key[1];
-  return fetch(`http://localhost/api/service/amass/db?domain=${domain}`).then(
-    (res) => res.json()
+  const res = await fetch(
+    `http://localhost/api/service/amass/db?domain=${domain}`
   );
+  if (!res.ok) throw new Error("Fail to fetch Enumeration Result Data");
+
+  return res.json();
 };
 
 export const fetchGraphEnumData = async ({ queryKey: key }) => {
-  const domain = key[key.length - 1];
-  return fetch(
+  const domain = key[1];
+  const res = await fetch(
     `http://localhost/api/service/amass/viz/graphistry?domain=${domain}`
-  ).then((res) => res.json());
+  );
+  if (!res.ok) throw new Error("Fail to fetch Subdomain Result Data");
+
+  return res.json();
 };
 
 // ZAP

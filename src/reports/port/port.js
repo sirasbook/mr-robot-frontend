@@ -63,7 +63,7 @@ const Port = () => {
   return (
     <div className="port-container" id="port">
       <h2>Port founded</h2>
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>
             <th>Port</th>
