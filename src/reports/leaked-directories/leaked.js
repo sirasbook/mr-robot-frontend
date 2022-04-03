@@ -1,28 +1,12 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { ClipLoader } from "react-spinners";
+import { fetchFFUFData } from "../../utils/fetcher";
 import "./leaked.scss";
 
 const Leaked = () => {
   const url = sessionStorage.getItem("url");
-  const query = useQuery(["ffuf", url], async () => {
-    const res = await fetch("http://localhost/api/service/ffuf/scan", {
-      headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify({
-        url: `${url}`,
-      }),
-    });
-
-    if (!res.ok) {
-      throw new Error("ffuf-service error!!");
-    }
-
-    return res.json();
-  });
+  const query = useQuery(["ffuf", url], fetchFFUFData);
 
   if (query.isLoading) {
     return (

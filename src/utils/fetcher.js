@@ -1,14 +1,34 @@
-import enumTempData from "../data/enum_result.json";
+// NMAP
+export const fetchNMAPData = async ({ queryKey: key }) => {
+  const url = key[1];
+  const res = await fetch("http://localhost/api/service/nmap/scan", {
+    headers: {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify({
+      url: `${url}`,
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error("Fetching Port Data Failed");
+  }
+
+  return res.json();
+};
 
 // WAPP
 export const fetchWAPPData = async ({ queryKey: key }) => {
   const url = key[key.length - 1];
-  return fetch(`http://localhost/api/service/wapp/scan?url=${url}`).then(
-    (res) => res.json()
-  );
+  const res = await fetch(`http://localhost/api/service/wapp/scan?url=${url}`);
 
-  // TODO: use code above to fetch instead
-  // return tempData;
+  if (!res.ok) {
+    throw new Error("WAPP running error!!!");
+  }
+
+  return res.json();
 };
 
 // Amass
@@ -24,7 +44,7 @@ export const fetchEnumData = async ({ queryKey: key }) => {
       domain: `${url}`,
       config: {
         mode: 0,
-        timeout: 5,
+        timeout: 10,
       },
     }),
   });
@@ -60,7 +80,7 @@ export const fetchGraphEnumData = async ({ queryKey: key }) => {
 export const fetchZAPData = async ({ queryKey: key }) => {
   const url = key[1];
   const option = key[2];
-  return fetch(`http://localhost/api/service/zap/scan`, {
+  const res = await fetch(`http://localhost/api/service/zap/scan`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -71,4 +91,31 @@ export const fetchZAPData = async ({ queryKey: key }) => {
       option,
     }),
   });
+
+  if (!res.ok) {
+    throw new Error("ZAP Error");
+  }
+
+  return res.json();
+};
+
+// FFUF
+export const fetchFFUFData = async ({ queryKey: key }) => {
+  const url = key[1];
+  const res = await fetch("http://localhost:8000/api/service/ffuf/scan", {
+    headers: {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify({
+      url: `${url}`,
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error("ffuf-service error!!");
+  }
+
+  return res.json();
 };

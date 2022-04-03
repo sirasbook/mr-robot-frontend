@@ -7,6 +7,7 @@ import psl from "psl";
 
 import SubdomainGraph from "../../components/amass/force-graph";
 import { ClipLoader } from "react-spinners";
+import { SubdomainList } from "../../components/subdomain";
 import {
   fetchEnumData,
   fetchGraphEnumData,
@@ -59,16 +60,6 @@ const Subdomain = () => {
 
   // Extract domain name from url
   const domain = psl.get(url);
-  console.log("domain", domain);
-
-  const handleClick = (e) => {
-    const name = e.target.text;
-    setOpenedDetails((old) => {
-      const val = new Set(old);
-      if (!val.delete(name)) val.add(name);
-      return val;
-    });
-  };
 
   // 1. Perform enumeration on input domain
   const enumQuery = useQuery(["enum", url], fetchEnumData);
@@ -149,84 +140,14 @@ const Subdomain = () => {
     );
   }
 
-  const renderSubdomain = () =>
-    enumData?.domains[0].names.map((info, idx) => {
-      const target = `target-collapse${idx}`;
-      const displayData = info.addresses.map((address) => {
-        return (
-          <tr key={address.ip}>
-            <td>{address.ip}</td>
-            <td>{address.cidr}</td>
-            <td>{address.desc}</td>
-          </tr>
-        );
-      });
-
-      const displaySource = info.sources.map((source) => {
-        return (
-          <ul>
-            <li>{source}</li>
-          </ul>
-        );
-      });
-
-      return (
-        <div className="each-sub-container">
-          {openedDetails.has(info.name) ? (
-            <i className="bi bi-caret-down-fill"></i>
-          ) : (
-            <i className="bi bi-caret-up-fill"></i>
-          )}
-          <a
-            id={info.name}
-            className="collapse-link"
-            data-bs-toggle="collapse"
-            href={`#${target}`}
-            aria-expanded="false"
-            aria-controls={target}
-            onClick={handleClick}
-          >
-            {info.name}
-          </a>
-          <div className="collapse" id={target}>
-            <div className="subdomain">
-              <div className="left">
-                <p>
-                  <a>Name:</a>
-                </p>
-                <p>Domain:</p>
-                <p>Tag:</p>
-                {info.addresses[0].asn !== undefined ? <p>ASN:</p> : null}
-              </div>
-              <div className="right">
-                <p>
-                  <a href={`https://${info.name}`}>{info.name}</a>
-                </p>
-                <p>{info.domain}</p>
-                <p>{info.tag}</p>
-                {info.addresses[0].asn !== undefined ? (
-                  <p>{info.addresses[0].asn}</p>
-                ) : null}
-              </div>
-            </div>
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>IP</th>
-                  <th>CDIR</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>{displayData}</tbody>
-            </table>
-            <div className="source">
-              <p>Sources:</p>
-              {displaySource}
-            </div>
-          </div>
-        </div>
-      );
+  const handleClick = (e) => {
+    const name = e.target.text;
+    setOpenedDetails((old) => {
+      const val = new Set(old);
+      if (!val.delete(name)) val.add(name);
+      return val;
     });
+  };
 
   const onNodeClick = (_, node) => {
     // set url to #id
@@ -287,14 +208,14 @@ const Subdomain = () => {
     );
   };
 
-  const tags = enumData?.domains[0].names.reduce((acc, name) => {
-    if (!acc[name.tag]) acc[name.tag] = 0;
-    acc[name.tag]++;
-
-    return acc;
-  }, {});
-
   const renderTagHead = () => {
+    const tags = enumData?.domains[0].names.reduce((acc, name) => {
+      if (!acc[name.tag]) acc[name.tag] = 0;
+      acc[name.tag]++;
+
+      return acc;
+    }, {});
+
     if (!tags) return;
 
     const keys = Object.keys(tags);
@@ -324,7 +245,11 @@ const Subdomain = () => {
         />
       </div>
       <h3>Subdomains</h3>
-      {renderSubdomain()}
+      <SubdomainList
+        domain={enumData?.domains[0]}
+        opens={openedDetails}
+        onClick={handleClick}
+      />
     </div>
   );
 };

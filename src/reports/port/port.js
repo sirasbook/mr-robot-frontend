@@ -1,29 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import "./port.scss";
-import tempData from "../../data/port.json";
 import { useQuery } from "react-query";
 import { ClipLoader } from "react-spinners";
+import { fetchNMAPData } from "../../utils/fetcher";
 
 const Port = () => {
   // const [data, setData] = useState(tempData);
 
   const url = sessionStorage.getItem("url");
-
-  const fetchNMAPData = async () => {
-    // return fetch("http://localhost/api/service/nmap/scan", {
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-type": "application/json",
-    //   },
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     url: `${url}`,
-    //   }),
-    // }).then((res) => res.json());
-
-    // TODO: use code above to fetch instead
-    return tempData;
-  };
 
   const { isLoading, data, error } = useQuery(["nmap", url], fetchNMAPData, {
     enabled: !!url,
