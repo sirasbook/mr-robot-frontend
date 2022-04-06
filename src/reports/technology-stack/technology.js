@@ -3,36 +3,40 @@ import "./technology.scss";
 import { useQuery } from "react-query";
 import { ClipLoader } from "react-spinners";
 import { fetchWAPPData } from "../../utils/fetcher";
+import { useWAPPData } from "../../hook/useWAPPData";
 
 const TechnologyStack = () => {
   let check = new Set();
   const url = sessionStorage.getItem("url");
 
-  const { isLoading, data, error } = useQuery(["wapp", url], fetchWAPPData);
+  const { isLoading, isFetching, data, error, isError } = useWAPPData(url);
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
       <div className="tech-container" id="technology">
         <div className="flex-col">
           <h2>Technology-stack used by the provided website</h2>
-          <ClipLoader />
+          <h3 className="error">
+            Scanning...
+            <ClipLoader />
+          </h3>
         </div>
       </div>
     );
   }
 
-  if (error) {
+  if (isError) {
     return (
       <div className="tech-container" id="technology">
         <div className="flex-col">
           <h2>Technology-stack used by the provided website</h2>
-          <p className="error">Error!!!</p>
+          <h3>Scan Failed: {error.message}</h3>
         </div>
       </div>
     );
   }
 
-  const displayData = data.map((info) => {
+  const displayData = data?.data.map((info) => {
     const displayBody = info.data.map((body) => {
       return (
         <tr>

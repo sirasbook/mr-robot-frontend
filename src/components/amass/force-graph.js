@@ -38,7 +38,6 @@ const ForceGraph = ({ data, onNodeClick = () => {} }) => {
     const { width, height } = dimension;
 
     const { graph: linkData, labels: nodeData } = graph;
-    console.log(linkData, nodeData);
 
     nodeData.forEach((node) => {
       node.id = node.node;
@@ -216,7 +215,6 @@ const ForceGraph = ({ data, onNodeClick = () => {} }) => {
 
     const dragsubject = (event) => {
       const node = findNode(event.x, event.y);
-      console.log(node);
 
       node.x = transform.applyX(node.x);
       node.y = transform.applyY(node.y);
@@ -230,7 +228,6 @@ const ForceGraph = ({ data, onNodeClick = () => {} }) => {
       const p = pointer(event);
 
       const node = findNode(p[0], p[1]);
-      console.log("click", node);
 
       if (!node) return;
 

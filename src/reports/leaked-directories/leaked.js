@@ -1,34 +1,37 @@
 import React from "react";
-import { useQuery } from "react-query";
 import { ClipLoader } from "react-spinners";
-import { fetchFFUFData } from "../../utils/fetcher";
+import { useFFUFData } from "../../hook/useFFUFData";
 import "./leaked.scss";
 
 const Leaked = () => {
   const url = sessionStorage.getItem("url");
-  const query = useQuery(["ffuf", url], fetchFFUFData);
+  const { data, isLoading, isFetching, error, isError } = useFFUFData(url);
 
-  if (query.isLoading) {
+  if (isLoading || isFetching) {
     return (
       <div className="leaked-container" id="leaked-dir">
         <h2>Leaked directories and files</h2>
-        <ClipLoader />
+        <h3>
+          Scanning...
+          <ClipLoader />
+        </h3>
       </div>
     );
   }
 
-  if (query.error) {
+  if (isError) {
     return (
       <div className="leaked-container" id="leaked-dir">
         <h2>Leaked directories and files</h2>
-        <p className="error">Error!!!</p>
+        <h3>
+          Scanning Failed: {error.message}
+          <ClipLoader />
+        </h3>
       </div>
     );
   }
 
-  const { data } = query;
-  const displayBody = data?.data?.map((info, idx) => {
-    console.log(info.url);
+  const displayBody = data?.data?.data.map((info, idx) => {
     return (
       <tr>
         <td className="no">{idx}</td>

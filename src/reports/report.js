@@ -1,10 +1,11 @@
 import React from "react";
 import TechnologyStack from "./technology-stack/technology";
-import "./report.scss";
 import Leaked from "./leaked-directories/leaked";
 import Alert from "./alerts-found/alert";
 import Subdomain from "./subdomains/subdomain";
 import Port from "./port/port";
+
+import "./report.scss";
 
 const Report = () => {
   return (
@@ -30,10 +31,10 @@ const Report = () => {
         </li>
         {/* <h2 id="summary">Summary</h2> */}
       </div>
-      {/* <Port /> */}
-      {/* <TechnologyStack /> */}
+      <Port />
+      <TechnologyStack />
       <Subdomain />
-      {/* <Leaked /> */}
+      <Leaked />
       {/* <Alert /> */}
     </div>
   );

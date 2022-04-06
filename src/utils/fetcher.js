@@ -1,22 +1,31 @@
 // NMAP
 export const fetchNMAPData = async ({ queryKey: key }) => {
-  const url = key[1];
-  const res = await fetch("http://localhost/api/service/nmap/scan", {
-    headers: {
-      Accept: "application/json",
-      "Content-type": "application/json",
-    },
-    method: "POST",
-    body: JSON.stringify({
-      url: `${url}`,
-    }),
-  });
+  const urls = key[1];
 
-  if (!res.ok) {
+  if (!urls?.length) {
+    return [];
+  }
+
+  const res = await Promise.all(
+    urls.map(async (url) =>
+      fetch("http://localhost/api/service/nmap/scan", {
+        headers: {
+          Accept: "appliclation/json",
+          "Content-type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({
+          url: `${url}`,
+        }),
+      })
+    )
+  );
+
+  if (!res.every((r) => r.ok)) {
     throw new Error("Fetching Port Data Failed");
   }
 
-  return res.json();
+  return Promise.all(res.map((r) => r.json()));
 };
 
 // WAPP

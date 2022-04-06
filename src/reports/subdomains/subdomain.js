@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { useQuery } from "react-query";
 import "./subdomain.scss";
 
 import psl from "psl";
@@ -8,18 +7,15 @@ import psl from "psl";
 import SubdomainGraph from "../../components/amass/force-graph";
 import { ClipLoader } from "react-spinners";
 import { SubdomainList } from "../../components/subdomain";
-import {
-  fetchEnumData,
-  fetchGraphEnumData,
-  fetchLatestEnumData,
-} from "../../utils/fetcher";
+import { useEnumData, useEnumerate } from "../../hook/useEnumData";
+import { Summary } from "../../components/subdomain/Summary";
 
 const useSummary = (data) => {
   const [state, setState] = useState({});
 
   useEffect(() => {
-    if (!data) return;
-    const addresses = data.domains[0].names.reduce((addrs, name) => {
+    if (!data?.data) return;
+    const addresses = data?.data.domains[0].names.reduce((addrs, name) => {
       return [...addrs, ...name.addresses];
     }, []);
 
@@ -56,89 +52,7 @@ const Subdomain = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const url = sessionStorage.getItem("url")?.replace(/^https?:\/\//, "");
-
-  // Extract domain name from url
-  const domain = psl.get(url);
-
-  // 1. Perform enumeration on input domain
-  const enumQuery = useQuery(["enum", url], fetchEnumData);
-
-  // 2. Retrieve latest enumeration data
-  const latestEnumQuery = useQuery(
-    ["latest-enum", domain],
-    fetchLatestEnumData,
-    {
-      enabled: !!enumQuery.isFetched,
-    }
-  );
-
-  // 3. Retrieve graph data of the latest enumeration data
   const [openedDetails, setOpenedDetails] = useState(new Set());
-
-  const enumData = latestEnumQuery?.data;
-
-  const summary = useSummary(enumData);
-
-  const graphQuery = useQuery(["graph", domain], fetchGraphEnumData, {
-    enabled: !!enumData,
-  });
-
-  const isLoading = [
-    enumQuery.isLoading,
-    latestEnumQuery.isLoading,
-    graphQuery.isLoading,
-  ].some(Boolean);
-
-  const isFetching = [
-    enumQuery.isFetching,
-    latestEnumQuery.isFetching,
-    graphQuery.isFetching,
-  ].some(Boolean);
-
-  const isError = [
-    enumQuery.isError,
-    latestEnumQuery.isError,
-    graphQuery.isError,
-    !domain,
-  ].some(Boolean);
-
-  if (isLoading || isFetching) {
-    if (enumQuery.isLoading || enumQuery.isFetching)
-      return (
-        <div className="subdomain-container" id="subdomain">
-          <h2>Found Subdomains</h2>
-          <p>Enumerating...</p>
-          <div className="loading">
-            <ClipLoader />
-          </div>
-        </div>
-      );
-    if (
-      latestEnumQuery.isLoading ||
-      latestEnumQuery.isFetching ||
-      graphQuery.isLoading ||
-      graphQuery.isFetching
-    )
-      return (
-        <div className="subdomain-container" id="subdomain">
-          <h2>Found Subdomains</h2>
-          <p>Fetching Result...</p>
-          <div className="loading">
-            <ClipLoader />
-          </div>
-        </div>
-      );
-  }
-
-  if (isError) {
-    return (
-      <div className="subdomain-container" id="subdomain">
-        <h2>Found Subdomains</h2>
-        <p className="error">Fail with error</p>
-      </div>
-    );
-  }
 
   const handleClick = (e) => {
     const name = e.target.text;
@@ -149,6 +63,84 @@ const Subdomain = () => {
     });
   };
 
+  const url = sessionStorage.getItem("url")?.replace(/^https?:\/\//, "");
+  // 1. Perform enumeration on input domain
+  const {
+    isLoading: enumIsLoading,
+    isFetching: enumIsFetching,
+    error: enumError,
+    isError: enumIsError,
+    isSuccess: enumIsSuccess,
+    refetch: enumRefetch,
+  } = useEnumerate(url, {
+    mode: 0,
+    timeout: 10,
+  });
+
+  // Extract domain name from url
+  const domain = psl.get(url);
+  // 2. Retrieve latest enumeration data & Retrieve graph data of the latest enumeration data
+  const [
+    {
+      data: enumData,
+      isLoading: enumDataIsLoading,
+      isFetching: enumDataIsFetching,
+      error: enumDataError,
+      isError: enumDataIsError,
+    },
+    {
+      data: enumGraphData,
+      isLoading: enumGraphDataIsLoading,
+      isFetching: enumGraphDataIsFetching,
+      error: enumGraphDataError,
+      isError: enumGraphDataIsError,
+    },
+  ] = useEnumData(domain, {
+    enabled: !!enumIsSuccess,
+  });
+
+  const summary = useSummary(enumData);
+
+  if (enumIsLoading || enumIsFetching) {
+    // Subdomain enumerating
+    return (
+      <div className="subdomain-container" id="subdomain">
+        <h3>
+          Enumeration Performing...
+          <ClipLoader />
+        </h3>
+      </div>
+    );
+  }
+
+  if (enumIsError) {
+    return (
+      <div className="subdomain-container" id="subdomain">
+        <h3 stlye={{ color: `red` }}>
+          Enumeration Failed: {enumError.message}
+        </h3>
+        <button onClick={enumRefetch}>Retry again</button>
+      </div>
+    );
+  }
+
+  if (
+    enumDataIsLoading ||
+    enumDataIsFetching ||
+    enumGraphDataIsLoading ||
+    enumGraphDataIsFetching
+  ) {
+    // Subdomain enumerating
+    return (
+      <div className="subdomain-container" id="subdomain">
+        <h3>
+          Fetching the results
+          <ClipLoader />
+        </h3>
+      </div>
+    );
+  }
+
   const onNodeClick = (_, node) => {
     // set url to #id
     history.replace(`${location.pathname}#${node.pointLabel}`);
@@ -158,6 +150,7 @@ const Subdomain = () => {
 
     // probably not exist in list
     if (!target) {
+      // TODO: More proper Not Found handler
       alert("The target domain might not exist in the list");
     }
 
@@ -171,45 +164,8 @@ const Subdomain = () => {
     });
   };
 
-  const renderSummary = () => {
-    return (
-      <>
-        {Object.entries(summary).map(([asn, info]) => (
-          <div key={asn}>
-            <p
-              style={{
-                fontWeight: `bold`,
-                fontSize: `20px`,
-              }}
-            >
-              ASN: {asn} - {info.desc}
-            </p>
-            <table className="table summary-table">
-              <thead>
-                <tr>
-                  <th className="left">CDIR</th>
-                  <th className="right">Subdomain Name(s)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Object.entries(info.cidr)
-                  .sort((l, r) => r[1].length - l[1].length)
-                  .map(([cidr, addrs]) => (
-                    <tr key={cidr}>
-                      <td className="left">{cidr}</td>
-                      <td className="right">{addrs.length}</td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div>
-        ))}
-      </>
-    );
-  };
-
   const renderTagHead = () => {
-    const tags = enumData?.domains[0].names.reduce((acc, name) => {
+    const tags = enumData?.data.domains[0].names.reduce((acc, name) => {
       if (!acc[name.tag]) acc[name.tag] = 0;
       acc[name.tag]++;
 
@@ -219,7 +175,7 @@ const Subdomain = () => {
     if (!tags) return;
 
     const keys = Object.keys(tags);
-    const domain = enumData?.domains[0];
+    const domain = enumData?.data.domains[0];
 
     return (
       <p>
@@ -237,19 +193,27 @@ const Subdomain = () => {
     <div className="subdomain-container" id="subdomain">
       <h2>Found Subdomains</h2>{" "}
       <div className="flex-row total">{renderTagHead()}</div>
-      {renderSummary()}
-      <div id="graph-container">
-        <SubdomainGraph
-          data={graphQuery.data.gResult}
-          onNodeClick={onNodeClick}
-        />
-      </div>
+      {!enumDataIsError && <Summary summary={summary} />}
+      {enumGraphDataIsError ? (
+        <h3>Fetch Graph Data Failed: {enumGraphDataError.message}</h3>
+      ) : (
+        <div id="graph-container">
+          <SubdomainGraph
+            data={enumGraphData?.data.gResult}
+            onNodeClick={onNodeClick}
+          />
+        </div>
+      )}
       <h3>Subdomains</h3>
-      <SubdomainList
-        domain={enumData?.domains[0]}
-        opens={openedDetails}
-        onClick={handleClick}
-      />
+      {enumDataIsError ? (
+        <h3>Fetch Enumeration Data Failed: {enumDataError.message}</h3>
+      ) : (
+        <SubdomainList
+          domain={enumData?.data.domains[0]}
+          opens={openedDetails}
+          onClick={handleClick}
+        />
+      )}
     </div>
   );
 };

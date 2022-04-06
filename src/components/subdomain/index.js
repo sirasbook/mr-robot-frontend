@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export const SubdomainData = ({ subname }) => {
   if (!subname.addresses) {
     return <h1>Error Render SubdomainDate</h1>;
@@ -26,7 +24,7 @@ export const SubdomainSources = ({ subname }) => {
     <>
       <ul>
         {subname.sources?.map((source) => (
-          <li>{source}</li>
+          <li key={source}>{source}</li>
         ))}
       </ul>
     </>
@@ -41,7 +39,7 @@ export const SubdomainList = ({ domain, opens, onClick }) => {
   const { names } = domain;
 
   return names?.map((info, idx) => (
-    <div className="each-sub-container">
+    <div key={info.name} className="each-sub-container">
       <i
         className={
           opens.has(info.name) ? `bi bi-caret-down-fill` : `bi bi-caret-up-fill`
