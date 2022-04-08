@@ -31,6 +31,8 @@ const Leaked = () => {
     );
   }
 
+  console.log("ffuf data", data);
+
   const displayBody = data?.data?.data.map((info, idx) => {
     return (
       <tr>
@@ -38,7 +40,11 @@ const Leaked = () => {
         <td>
           <a href={info.url}>{info.url}</a>
         </td>
-        {info.content_type === "" ? <td>N/A</td> : <td>{info.content_type}</td>}
+        {info["content-type"].length ? (
+          <td>N/A</td>
+        ) : (
+          <td>{info["content-type"]}</td>
+        )}
       </tr>
     );
   });

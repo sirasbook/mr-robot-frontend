@@ -35,7 +35,7 @@ const Report = () => {
       <TechnologyStack />
       <Subdomain />
       <Leaked />
-      {/* <Alert /> */}
+      <Alert />
     </div>
   );
 };

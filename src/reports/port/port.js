@@ -43,8 +43,10 @@ const Port = () => {
                   !isError &&
                   data && (
                     <NmapResultItem
-                      key={data?.data.nmaprun.target["@specification"]}
-                      target={data?.data.nmaprun.target}
+                      key={data?.data.nmaprun.host.hostnames.hostname["@name"]}
+                      target={
+                        data?.data.nmaprun.host.hostnames.hostname["@name"]
+                      }
                     />
                   )
                 )}

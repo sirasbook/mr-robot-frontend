@@ -116,6 +116,7 @@ const Subdomain = () => {
   if (enumIsError) {
     return (
       <div className="subdomain-container" id="subdomain">
+        <h2>Found Subdomains</h2>{" "}
         <h3 stlye={{ color: `red` }}>
           Enumeration Failed: {enumError.message}
         </h3>
@@ -133,6 +134,7 @@ const Subdomain = () => {
     // Subdomain enumerating
     return (
       <div className="subdomain-container" id="subdomain">
+        <h2>Found Subdomains</h2>{" "}
         <h3>
           Fetching the results
           <ClipLoader />
