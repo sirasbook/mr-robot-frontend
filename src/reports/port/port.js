@@ -1,15 +1,73 @@
 import React from "react";
 import "./port.scss";
-import { ClipLoader } from "react-spinners";
 
 import psl from "psl";
 import { useNmapData } from "../../hook/useNmapData";
 import { useEnumData } from "../../hook/useEnumData";
 
-const NmapResultItem = ({ target }) => {
+import Loader from "../../components/Loader";
+
+const NmapPortItem = ({ port }) => {
+  return (
+    <tr key={port["@portid"]}>
+      <td>{port["@portid"]}</td>
+      <td>{port["@protocol"]}</td>
+      <td>{port.service["@name"]}</td>
+      <td>{port.state["@state"]}</td>
+    </tr>
+  );
+};
+const NmapResultItem = ({ host, handleRefetch = () => {} }) => {
+  const {
+    hostnames: { hostname },
+    address,
+    ports,
+  } = host;
+
   return (
     <>
-      <li>{target["@specification"]}</li>
+      <h3>{hostname["@name"]}</h3>
+      <ul className="">
+        <li>
+          <strong>Address</strong>: {address["@addr"]}
+        </li>
+        <li>
+          <strong>Type</strong>: {address["@addrtype"]?.toUpperCase()}
+        </li>
+      </ul>
+      {!ports?.port ? (
+        <div
+          style={{
+            display: `flex`,
+            flexDirection: `column`,
+            justifyContent: `center`,
+            alignItems: `center`,
+          }}
+        >
+          <h5>
+            <strong>Not Found </strong>
+          </h5>
+          <button onClick={handleRefetch}>Try Scan The Host Again</button>
+        </div>
+      ) : (
+        <table className="table">
+          <thead>
+            <tr>
+              <td>Port Number</td>
+              <td>Protocol</td>
+              <td>Service</td>
+              <td>State</td>
+            </tr>
+          </thead>
+          <tbody>
+            {Array.isArray(ports.port) ? (
+              ports?.port.map((portItem) => <NmapPortItem port={portItem} />)
+            ) : (
+              <NmapPortItem port={ports.port} />
+            )}{" "}
+          </tbody>
+        </table>
+      )}
     </>
   );
 };
@@ -27,64 +85,46 @@ const Port = () => {
   ];
   const nmapData = useNmapData(urls);
 
+  const handleRetry = () => {
+    nmapData.forEach((item) => {
+      if (item.isError) item.refetch();
+    });
+  };
+
   return (
     <>
       <div className="port-container" id="port">
         <h2>Port Testing</h2>
+        {nmapData.map((item) => item.isError).some(Boolean) && (
+          <button onClick={handleRetry}>Retry Failed Request Again</button>
+        )}
         <ul>
-          {nmapData?.map(({ data, isLoading, isFetching, isError }) => {
-            return (
-              <>
-                {isLoading || isFetching ? (
-                  <p>
-                    Scaning <ClipLoader />
-                  </p>
-                ) : (
-                  !isError &&
-                  data && (
-                    <NmapResultItem
-                      key={data?.data.nmaprun.host.hostnames.hostname["@name"]}
-                      target={
-                        data?.data.nmaprun.host.hostnames.hostname["@name"]
-                      }
-                    />
-                  )
-                )}
-              </>
-            );
-          })}
+          {nmapData
+            ?.sort((_, b) => b.isFetched)
+            .map(({ data, isLoading, isFetching, isError, refetch }) => {
+              return (
+                <div className="port-item">
+                  {isLoading || isFetching ? (
+                    <Loader msg={`Scanning`} />
+                  ) : (
+                    !isError &&
+                    data && (
+                      <NmapResultItem
+                        key={
+                          data?.data.nmaprun.host.hostnames.hostname["@name"]
+                        }
+                        host={data?.data.nmaprun.host}
+                        handleRefetch={refetch}
+                      />
+                    )
+                  )}
+                </div>
+              );
+            })}
         </ul>
       </div>
     </>
   );
-
-  //   const displayBody = data.nmaprun.host.ports.port.map((info) => {
-  //     return (
-  //       <tr>
-  //         <td>{info["-portid"]}</td>
-  //         <td>{info["-protocol"]}</td>
-  //         <td>{info.state["-state"]}</td>
-  //         <td>{info.service["-name"]}</td>
-  //       </tr>
-  //     );
-  //   });
-
-  //   return (
-  //     <div className="port-container" id="port">
-  //       <h2>Port founded</h2>
-  //       <table className="table">
-  //         <thead>
-  //           <tr>
-  //             <th>Port</th>
-  //             <th>Protocol</th>
-  //             <th>State</th>
-  //             <th>Service</th>
-  //           </tr>
-  //         </thead>
-  //         <tbody>{displayBody}</tbody>
-  //       </table>
-  //     </div>
-  //   );
 };
 
 export default Port;

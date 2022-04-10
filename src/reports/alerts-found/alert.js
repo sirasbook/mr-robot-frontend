@@ -1,24 +1,19 @@
 import React from "react";
-import { useQuery } from "react-query";
-import { ClipLoader } from "react-spinners";
-import { fetchZAPData } from "../../utils/fetcher";
+import Loader from "../../components/Loader";
 import "./alert.scss";
+import { useZAPData } from "../../hook/useZAPData";
 
 const Alert = () => {
   let total = 0;
 
   const url = sessionStorage.getItem("url");
   const option = sessionStorage.getItem("zap-option");
-  const { isLoading, isFetching, data, error } = useQuery(
-    ["zap", url, option],
-    fetchZAPData
-  );
-
+  const { isLoading, isFetching, data, error } = useZAPData({ url, option });
   if (isLoading || isFetching) {
     return (
       <div className="alert-container" id="alert">
         <h2>Alert summary</h2>
-        <ClipLoader />
+        <Loader msg={`Scanning`} />
       </div>
     );
   }

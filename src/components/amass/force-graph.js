@@ -9,6 +9,10 @@ import React, { useEffect, useRef, useState } from "react";
 
 import "./force-graph.scss";
 
+const IPV46REGEX =
+  /((^\s*((([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s*$)|(^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$))/gm;
+const NUMBER = /^[0-9]+$/gm;
+
 const useResizeObserver = (ref) => {
   const [dimension, setDimension] = useState(null);
   useEffect(() => {
@@ -98,6 +102,8 @@ const ForceGraph = ({ data, onNodeClick = () => {} }) => {
 
     const drawNode = (d) => {
       const size = nodeRadius(d);
+      d.pointLabel = d.pointLabel.trim();
+      // console.log(d);
 
       ctx.beginPath();
       ctx.fillStyle = color(d.pointColor);
@@ -106,6 +112,15 @@ const ForceGraph = ({ data, onNodeClick = () => {} }) => {
       ctx.strokeStyle = "#333333";
       ctx.stroke();
       ctx.fill();
+
+      const isIP = IPV46REGEX.test(d.pointLabel);
+      const isNumber = NUMBER.test(d.pointLabel);
+
+      if (!isIP && !isNumber) {
+        ctx.fillStyle = "#222222";
+        ctx.textAlign = "center";
+        ctx.fillText(`${d.pointLabel}`, d.x, d.y);
+      }
     };
 
     const drawEdge = (e) => {
@@ -144,11 +159,16 @@ const ForceGraph = ({ data, onNodeClick = () => {} }) => {
       nodeData.forEach(drawNode);
 
       if (closeNode) {
+        closeNode.pointLabel = closeNode.pointLabel.trim();
+        const isIP = IPV46REGEX.test(closeNode.pointLabel);
+        const type = isIP ? `IP` : `Domain`;
         select("#graph-tooltip")
           .style("opacity", 0.8)
           .style("top", transform.applyY(closeNode.y) + 5 + "px")
           .style("left", transform.applyX(closeNode.x) + 5 + "px")
-          .text(`Domain: ${closeNode.pointLabel}, Source: ${closeNode.source}`);
+          .text(
+            `${type}: ${closeNode.pointLabel}, Source: ${closeNode.source}`
+          );
       } else {
         select("#graph-tooltip").style("opacity", 0);
       }

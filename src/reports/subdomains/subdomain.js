@@ -5,10 +5,10 @@ import "./subdomain.scss";
 import psl from "psl";
 
 import SubdomainGraph from "../../components/amass/force-graph";
-import { ClipLoader } from "react-spinners";
 import { SubdomainList } from "../../components/subdomain";
 import { useEnumData, useEnumerate } from "../../hook/useEnumData";
 import { Summary } from "../../components/subdomain/Summary";
+import Loader from "../../components/Loader";
 
 const useSummary = (data) => {
   const [state, setState] = useState({});
@@ -105,10 +105,7 @@ const Subdomain = () => {
     // Subdomain enumerating
     return (
       <div className="subdomain-container" id="subdomain">
-        <h3>
-          Enumeration Performing...
-          <ClipLoader />
-        </h3>
+        <h2>Found Subdomains</h2> <Loader msg={`Enumeration Performing`} />
       </div>
     );
   }
@@ -134,11 +131,7 @@ const Subdomain = () => {
     // Subdomain enumerating
     return (
       <div className="subdomain-container" id="subdomain">
-        <h2>Found Subdomains</h2>{" "}
-        <h3>
-          Fetching the results
-          <ClipLoader />
-        </h3>
+        <h2>Found Subdomains</h2> <Loader msg={`Fetching the results`} />
       </div>
     );
   }

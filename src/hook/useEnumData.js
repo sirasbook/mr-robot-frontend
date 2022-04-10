@@ -23,6 +23,7 @@ const fetchEnumGraphData = async ({ queryKey }) => {
 export const useEnumerate = (url, config = {}) => {
   const queryClient = useQueryClient();
   return useQuery(["enum", url, config], enumerate, {
+    staleTime: 5 * 60 * 1000,
     onSuccess: () => {
       queryClient.invalidateQueries("enum-data");
       queryClient.invalidateQueries("enum-graph");

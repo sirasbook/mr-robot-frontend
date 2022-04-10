@@ -1,20 +1,19 @@
 import React from "react";
-import { ClipLoader } from "react-spinners";
 import { useFFUFData } from "../../hook/useFFUFData";
 import "./leaked.scss";
 
+import Loader from "../../components/Loader";
+
 const Leaked = () => {
   const url = sessionStorage.getItem("url");
-  const { data, isLoading, isFetching, error, isError } = useFFUFData(url);
+  const { data, isLoading, isFetching, error, isError, refetch } =
+    useFFUFData(url);
 
   if (isLoading || isFetching) {
     return (
       <div className="leaked-container" id="leaked-dir">
         <h2>Leaked directories and files</h2>
-        <h3>
-          Scanning...
-          <ClipLoader />
-        </h3>
+        <Loader msg={`Scanning`} />
       </div>
     );
   }
@@ -23,15 +22,11 @@ const Leaked = () => {
     return (
       <div className="leaked-container" id="leaked-dir">
         <h2>Leaked directories and files</h2>
-        <h3>
-          Scanning Failed: {error.message}
-          <ClipLoader />
-        </h3>
+        <p>Scanning Failed: {error.message}</p>
+        <button onClick={refetch}>Retry Again</button>
       </div>
     );
   }
-
-  console.log("ffuf data", data);
 
   const displayBody = data?.data?.data.map((info, idx) => {
     return (
@@ -40,7 +35,7 @@ const Leaked = () => {
         <td>
           <a href={info.url}>{info.url}</a>
         </td>
-        {info["content-type"].length ? (
+        {!info["content-type"].length ? (
           <td>N/A</td>
         ) : (
           <td>{info["content-type"]}</td>

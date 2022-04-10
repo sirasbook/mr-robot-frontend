@@ -1,9 +1,8 @@
 import React from "react";
 import "./technology.scss";
-import { useQuery } from "react-query";
-import { ClipLoader } from "react-spinners";
-import { fetchWAPPData } from "../../utils/fetcher";
 import { useWAPPData } from "../../hook/useWAPPData";
+
+import Loader from "../../components/Loader";
 
 const TechnologyStack = () => {
   let check = new Set();
@@ -16,10 +15,7 @@ const TechnologyStack = () => {
       <div className="tech-container" id="technology">
         <div className="flex-col">
           <h2>Technology-stack used by the provided website</h2>
-          <h3 className="error">
-            Scanning...
-            <ClipLoader />
-          </h3>
+          <Loader msg={`Scanning`} />
         </div>
       </div>
     );

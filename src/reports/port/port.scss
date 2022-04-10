@@ -2,6 +2,16 @@
     background-color: white;
     padding: 60px 100px 30px 100px;
 
+    & > ul {
+        padding: 0;
+    }
+
+    .port-item {
+        & + ul {
+            padding: 0;
+        }
+    }
+
     h2 {
         font-weight: 600;
     }
