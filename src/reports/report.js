@@ -6,6 +6,7 @@ import Subdomain from "./subdomains/subdomain";
 import Port from "./port/port";
 
 import "./report.scss";
+import PortItem from "../components/port/port-item";
 
 const Report = () => {
   return (
@@ -32,10 +33,10 @@ const Report = () => {
         {/* <h2 id="summary">Summary</h2> */}
       </div>
       <Port />
-      <TechnologyStack />
+      {/* <TechnologyStack />
       <Subdomain />
       <Leaked />
-      <Alert />
+      <Alert /> */}
     </div>
   );
 };
