@@ -32,15 +32,67 @@ export const useNmapData = (urls, queryOptions) => {
 // const URL = `ws://localhost/api/ws/service/nmap/scan`;
 const WS_URL = `ws://localhost:8000/api/ws/scan`;
 
+const initialState = {
+  hostnames: [],
+  address: null,
+  ports: [],
+  nmaprun: null,
+};
+
 export const useNmapWebSocket = (url) => {
-  return useWebSocket(WS_URL, {
+  const [data, setData] = useState(initialState);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  const {
+    sendJsonMessage,
+    getWebSocket,
+    lastJsonMessage,
+    readyState,
+  } = useWebSocket(WS_URL, {
     onOpen: () => {
       console.log("connection on open");
+      setIsLoading(true);
     },
     shouldReconnect: (event) => event.code !== 1000,
     reconnectAttempts: 3,
     reconnectInterval: 1000,
+    onReconnectStop: () => {
+      setIsError(true);
+    },
   });
+
+  useEffect(() => {
+    if (!getWebSocket()) return;
+    setData(initialState);
+    sendJsonMessage({ url });
+  }, [getWebSocket()]);
+
+  useEffect(() => {
+    if (!lastJsonMessage) return;
+    switch (lastJsonMessage.type) {
+      case "address":
+        setData((d) => ({ ...d, ...lastJsonMessage.data }));
+        break;
+      case "hostname":
+        setData((d) => ({
+          ...d,
+          hostnames: [...d.hostnames, lastJsonMessage.data],
+        }));
+        break;
+      case "port":
+        setData((d) => ({ ...d, ports: [...d.ports, lastJsonMessage.data] }));
+        setIsLoading(false);
+        break;
+      case "final":
+        setData((d) => ({ ...d, ...lastJsonMessage.data }));
+        break;
+      default:
+        break;
+    }
+  }, [lastJsonMessage]);
+
+  return { data, isLoading, isError };
 };
 
 // export const useNmapWebSocket = (url) => {

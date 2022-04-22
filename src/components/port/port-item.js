@@ -2,49 +2,25 @@ import React, { useEffect, useState } from "react";
 import { ReadyState } from "react-use-websocket";
 import { useNmapWebSocket } from "../../hook/useNmapData";
 import { NmapPortItem } from "./result-port-item";
-
-const initialState = {
-  hostnames: [],
-  address: null,
-  ports: [],
-  nmaprun: null,
-};
+import Loader from "../../components/Loader";
 
 const PortItem = ({ url }) => {
-  const [data, setData] = useState(initialState);
-  const { sendJsonMessage, getWebSocket, lastJsonMessage, readyState } =
-    useNmapWebSocket(url);
-
-  useEffect(() => {
-    if (!getWebSocket()) return;
-    setData(initialState);
-    sendJsonMessage({ url });
-  }, [getWebSocket()]);
-
-  useEffect(() => {
-    if (!lastJsonMessage) return;
-    switch (lastJsonMessage.type) {
-      case "address":
-        setData((d) => ({ ...d, ...lastJsonMessage.data }));
-        break;
-      case "hostname":
-        setData((d) => ({
-          ...d,
-          hostnames: [...d.hostnames, lastJsonMessage.data],
-        }));
-        break;
-      case "port":
-        setData((d) => ({ ...d, ports: [...d.ports, lastJsonMessage.data] }));
-        break;
-      case "final":
-        setData((d) => ({ ...d, ...lastJsonMessage.data }));
-        break;
-      default:
-        break;
-    }
-  }, [lastJsonMessage]);
-
+  const { data, isLoading, isError } = useNmapWebSocket(url);
   const { ports, hostnames, address, nmaprun } = data;
+
+  const refetch = () => {
+    window.location.reload();
+  };
+
+  if (isError) {
+    return (
+      <div>
+        <h3>{url}</h3>
+        <p>Scanning Failed</p>
+        <button onClick={refetch}>Retry Again</button>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -52,12 +28,14 @@ const PortItem = ({ url }) => {
       <h5>
         <strong>Hostnames</strong>
       </h5>
-      {hostnames.length > 0 && (
+      {hostnames.length > 0 ? (
         <ul className="hostnames">
           {hostnames?.map(({ hostname }) => (
             <li>{hostname["@name"]}</li>
           ))}
         </ul>
+      ) : (
+        <Loader />
       )}
       <h5>
         <strong>Address</strong>
@@ -72,21 +50,25 @@ const PortItem = ({ url }) => {
           </li>
         </ul>
       )}
-      <table className="table">
-        <thead>
-          <tr>
-            <td>Port Number</td>
-            <td>Protocol</td>
-            <td>Service</td>
-            <td>State</td>
-          </tr>
-        </thead>
-        <tbody>
-          {ports?.map(({ port }) => (
-            <NmapPortItem port={port} />
-          ))}
-        </tbody>
-      </table>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <table className="table">
+          <thead>
+            <tr>
+              <td>Port Number</td>
+              <td>Protocol</td>
+              <td>Service</td>
+              <td>State</td>
+            </tr>
+          </thead>
+          <tbody>
+            {ports?.map(({ port }) => (
+              <NmapPortItem port={port} />
+            ))}
+          </tbody>
+        </table>
+      )}
     </>
   );
 };
