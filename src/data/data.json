@@ -1,0 +1,2463 @@
+{
+  "name": "OWASP_Amass_Feb28_2022_05_14_32",
+  "type": "edgelist",
+  "bindings": {
+    "sourceField": "src",
+    "destinationField": "dst",
+    "idField": "node"
+  },
+  "graph": [
+    {
+      "src": "0",
+      "dst": "103",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "0",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "4",
+      "dst": "132",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "4",
+      "dst": "7",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "4",
+      "dst": "24",
+      "edgeTitle": "aaaa_record"
+    },
+    {
+      "src": "6",
+      "dst": "77",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "6",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "8",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "8",
+      "dst": "58",
+      "edgeTitle": "cname_record"
+    },
+    {
+      "src": "9",
+      "dst": "48",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "9",
+      "dst": "79",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "9",
+      "dst": "57",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "10",
+      "dst": "3",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "10",
+      "dst": "95",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "10",
+      "dst": "57",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "11",
+      "dst": "104",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "11",
+      "dst": "96",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "11",
+      "dst": "18",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "11",
+      "dst": "116",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "11",
+      "dst": "134",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "11",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "13",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "13",
+      "dst": "10",
+      "edgeTitle": "cname_record"
+    },
+    {
+      "src": "14",
+      "dst": "59",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "14",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "16",
+      "dst": "116",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "16",
+      "dst": "134",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "16",
+      "dst": "18",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "16",
+      "dst": "96",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "16",
+      "dst": "104",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "16",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "17",
+      "dst": "45",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "17",
+      "dst": "73",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "17",
+      "dst": "71",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "17",
+      "dst": "27",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "17",
+      "dst": "112",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "17",
+      "dst": "47",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "17",
+      "dst": "15",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "17",
+      "dst": "74",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "17",
+      "dst": "135",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "17",
+      "dst": "56",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "17",
+      "dst": "46",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "17",
+      "dst": "21",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "17",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "19",
+      "dst": "53",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "19",
+      "dst": "7",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "19",
+      "dst": "76",
+      "edgeTitle": "aaaa_record"
+    },
+    {
+      "src": "20",
+      "dst": "105",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "20",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "22",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "22",
+      "dst": "9",
+      "edgeTitle": "cname_record"
+    },
+    {
+      "src": "25",
+      "dst": "29",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "28",
+      "dst": "96",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "28",
+      "dst": "134",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "28",
+      "dst": "104",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "28",
+      "dst": "18",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "28",
+      "dst": "116",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "28",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "30",
+      "dst": "134",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "30",
+      "dst": "104",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "30",
+      "dst": "96",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "30",
+      "dst": "116",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "30",
+      "dst": "18",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "30",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "32",
+      "dst": "100",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "32",
+      "dst": "110",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "33",
+      "dst": "116",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "33",
+      "dst": "96",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "33",
+      "dst": "104",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "33",
+      "dst": "134",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "33",
+      "dst": "79",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "34",
+      "dst": "51",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "34",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "35",
+      "dst": "18",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "35",
+      "dst": "116",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "35",
+      "dst": "96",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "35",
+      "dst": "104",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "35",
+      "dst": "134",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "35",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "35",
+      "dst": "63",
+      "edgeTitle": "ns_record"
+    },
+    {
+      "src": "35",
+      "dst": "36",
+      "edgeTitle": "ns_record"
+    },
+    {
+      "src": "35",
+      "dst": "136",
+      "edgeTitle": "mx_record"
+    },
+    {
+      "src": "35",
+      "dst": "122",
+      "edgeTitle": "mx_record"
+    },
+    {
+      "src": "35",
+      "dst": "128",
+      "edgeTitle": "mx_record"
+    },
+    {
+      "src": "35",
+      "dst": "19",
+      "edgeTitle": "mx_record"
+    },
+    {
+      "src": "35",
+      "dst": "4",
+      "edgeTitle": "mx_record"
+    },
+    {
+      "src": "36",
+      "dst": "117",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "36",
+      "dst": "91",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "36",
+      "dst": "124",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "36",
+      "dst": "26",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "36",
+      "dst": "64",
+      "edgeTitle": "aaaa_record"
+    },
+    {
+      "src": "36",
+      "dst": "100",
+      "edgeTitle": "aaaa_record"
+    },
+    {
+      "src": "36",
+      "dst": "78",
+      "edgeTitle": "aaaa_record"
+    },
+    {
+      "src": "37",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "37",
+      "dst": "92",
+      "edgeTitle": "cname_record"
+    },
+    {
+      "src": "38",
+      "dst": "31",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "39",
+      "dst": "31",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "39",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "40",
+      "dst": "113",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "40",
+      "dst": "109",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "41",
+      "dst": "91",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "41",
+      "dst": "65",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "42",
+      "dst": "70",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "42",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "43",
+      "dst": "98",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "43",
+      "dst": "52",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "43",
+      "dst": "80",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "43",
+      "dst": "132",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "43",
+      "dst": "53",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "44",
+      "dst": "23",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "49",
+      "dst": "96",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "49",
+      "dst": "104",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "49",
+      "dst": "116",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "49",
+      "dst": "18",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "49",
+      "dst": "134",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "49",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "58",
+      "dst": "3",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "58",
+      "dst": "95",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "58",
+      "dst": "57",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "60",
+      "dst": "124",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "60",
+      "dst": "50",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "61",
+      "dst": "5",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "62",
+      "dst": "55",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "63",
+      "dst": "69",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "63",
+      "dst": "50",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "63",
+      "dst": "65",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "63",
+      "dst": "26",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "63",
+      "dst": "121",
+      "edgeTitle": "aaaa_record"
+    },
+    {
+      "src": "63",
+      "dst": "110",
+      "edgeTitle": "aaaa_record"
+    },
+    {
+      "src": "63",
+      "dst": "111",
+      "edgeTitle": "aaaa_record"
+    },
+    {
+      "src": "66",
+      "dst": "134",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "66",
+      "dst": "18",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "66",
+      "dst": "104",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "66",
+      "dst": "96",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "66",
+      "dst": "116",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "66",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "67",
+      "dst": "117",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "67",
+      "dst": "69",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "68",
+      "dst": "54",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "68",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "72",
+      "dst": "61",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "72",
+      "dst": "101",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "72",
+      "dst": "123",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "72",
+      "dst": "131",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "72",
+      "dst": "38",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "72",
+      "dst": "62",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "72",
+      "dst": "93",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "72",
+      "dst": "126",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "72",
+      "dst": "94",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "72",
+      "dst": "107",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "72",
+      "dst": "44",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "72",
+      "dst": "86",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "72",
+      "dst": "115",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "72",
+      "dst": "25",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "75",
+      "dst": "120",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "81",
+      "dst": "48",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "81",
+      "dst": "79",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "81",
+      "dst": "57",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "82",
+      "dst": "78",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "82",
+      "dst": "121",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "84",
+      "dst": "18",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "84",
+      "dst": "48",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "85",
+      "dst": "55",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "85",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "86",
+      "dst": "59",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "87",
+      "dst": "18",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "87",
+      "dst": "96",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "87",
+      "dst": "116",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "87",
+      "dst": "134",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "87",
+      "dst": "104",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "87",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "88",
+      "dst": "84",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "88",
+      "dst": "89",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "88",
+      "dst": "67",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "88",
+      "dst": "41",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "88",
+      "dst": "60",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "88",
+      "dst": "32",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "88",
+      "dst": "82",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "88",
+      "dst": "33",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "88",
+      "dst": "102",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "89",
+      "dst": "3",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "89",
+      "dst": "95",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "90",
+      "dst": "23",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "90",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "92",
+      "dst": "48",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "92",
+      "dst": "79",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "92",
+      "dst": "57",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "93",
+      "dst": "24",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "94",
+      "dst": "54",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "94",
+      "dst": "51",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "94",
+      "dst": "70",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "97",
+      "dst": "43",
+      "edgeTitle": "prefix"
+    },
+    {
+      "src": "99",
+      "dst": "18",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "99",
+      "dst": "134",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "99",
+      "dst": "116",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "99",
+      "dst": "96",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "99",
+      "dst": "104",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "99",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "101",
+      "dst": "2",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "102",
+      "dst": "64",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "102",
+      "dst": "111",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "106",
+      "dst": "134",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "106",
+      "dst": "104",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "106",
+      "dst": "96",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "106",
+      "dst": "18",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "106",
+      "dst": "116",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "106",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "107",
+      "dst": "12",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "108",
+      "dst": "48",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "108",
+      "dst": "79",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "108",
+      "dst": "57",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "109",
+      "dst": "103",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "113",
+      "dst": "1",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "114",
+      "dst": "95",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "114",
+      "dst": "3",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "114",
+      "dst": "57",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "115",
+      "dst": "105",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "118",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "118",
+      "dst": "81",
+      "edgeTitle": "cname_record"
+    },
+    {
+      "src": "119",
+      "dst": "130",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "119",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "120",
+      "dst": "21",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "120",
+      "dst": "45",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "120",
+      "dst": "73",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "120",
+      "dst": "71",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "120",
+      "dst": "27",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "120",
+      "dst": "112",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "120",
+      "dst": "47",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "120",
+      "dst": "15",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "120",
+      "dst": "74",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "120",
+      "dst": "135",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "120",
+      "dst": "56",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "120",
+      "dst": "46",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "122",
+      "dst": "52",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "122",
+      "dst": "83",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "122",
+      "dst": "5",
+      "edgeTitle": "aaaa_record"
+    },
+    {
+      "src": "123",
+      "dst": "77",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "125",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "125",
+      "dst": "114",
+      "edgeTitle": "cname_record"
+    },
+    {
+      "src": "126",
+      "dst": "76",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "127",
+      "dst": "1",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "127",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "128",
+      "dst": "80",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "128",
+      "dst": "83",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "128",
+      "dst": "2",
+      "edgeTitle": "aaaa_record"
+    },
+    {
+      "src": "129",
+      "dst": "29",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "129",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "131",
+      "dst": "130",
+      "edgeTitle": "contains"
+    },
+    {
+      "src": "133",
+      "dst": "134",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "133",
+      "dst": "116",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "133",
+      "dst": "96",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "133",
+      "dst": "104",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "133",
+      "dst": "18",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "133",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "136",
+      "dst": "98",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "136",
+      "dst": "83",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "137",
+      "dst": "12",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "137",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "138",
+      "dst": "96",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "138",
+      "dst": "18",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "138",
+      "dst": "134",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "138",
+      "dst": "116",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "138",
+      "dst": "104",
+      "edgeTitle": "a_record"
+    },
+    {
+      "src": "138",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "139",
+      "dst": "35",
+      "edgeTitle": "root"
+    },
+    {
+      "src": "139",
+      "dst": "108",
+      "edgeTitle": "cname_record"
+    }
+  ],
+  "labels": [
+    {
+      "node": "0",
+      "pointLabel": "o14.ptr6344.discord.com",
+      "pointTitle": "subdomain: o14.ptr6344.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "1",
+      "pointLabel": "192.254.120.211",
+      "pointTitle": "address: 192.254.120.211",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "2",
+      "pointLabel": "2607:f8b0:4023:1c01::1a",
+      "pointTitle": "address: 2607:f8b0:4023:1c01::1a",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "3",
+      "pointLabel": "104.16.53.111",
+      "pointTitle": "address: 104.16.53.111",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "4",
+      "pointLabel": "aspmx3.googlemail.com",
+      "pointTitle": "mx: aspmx3.googlemail.com",
+      "pointColor": 9,
+      "type": "mx",
+      "source": "DNS"
+    },
+    {
+      "node": "5",
+      "pointLabel": "2a00:1450:400c:c0b::1b",
+      "pointTitle": "address: 2a00:1450:400c:c0b::1b",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "6",
+      "pointLabel": "o15.ptr9908.discord.com",
+      "pointTitle": "subdomain: o15.ptr9908.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "7",
+      "pointLabel": "googlemail.com",
+      "pointTitle": "domain: googlemail.com",
+      "pointColor": 5,
+      "type": "domain",
+      "source": "DNS"
+    },
+    {
+      "node": "8",
+      "pointLabel": "safety.discord.com",
+      "pointTitle": "subdomain: safety.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "Crtsh"
+    },
+    {
+      "node": "9",
+      "pointLabel": "mail2.zendesk.com",
+      "pointTitle": "subdomain: mail2.zendesk.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "DNS"
+    },
+    {
+      "node": "10",
+      "pointLabel": "hammerandchisel.zendesk.com",
+      "pointTitle": "subdomain: hammerandchisel.zendesk.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "DNS"
+    },
+    {
+      "node": "11",
+      "pointLabel": "feedback.discord.com",
+      "pointTitle": "subdomain: feedback.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "12",
+      "pointLabel": "149.72.138.241",
+      "pointTitle": "address: 149.72.138.241",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "13",
+      "pointLabel": "support.discord.com",
+      "pointTitle": "subdomain: support.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "Crtsh"
+    },
+    {
+      "node": "14",
+      "pointLabel": "o23.ptr1336.discord.com",
+      "pointTitle": "subdomain: o23.ptr1336.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "15",
+      "pointLabel": "52.4.38.70",
+      "pointTitle": "address: 52.4.38.70",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "16",
+      "pointLabel": "canary.discord.com",
+      "pointTitle": "subdomain: canary.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "17",
+      "pointLabel": "blog.discord.com",
+      "pointTitle": "subdomain: blog.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "Crtsh"
+    },
+    {
+      "node": "18",
+      "pointLabel": "162.159.128.233",
+      "pointTitle": "address: 162.159.128.233",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "19",
+      "pointLabel": "aspmx2.googlemail.com",
+      "pointTitle": "mx: aspmx2.googlemail.com",
+      "pointColor": 9,
+      "type": "mx",
+      "source": "DNS"
+    },
+    {
+      "node": "20",
+      "pointLabel": "o13.ptr7216.discord.com",
+      "pointTitle": "subdomain: o13.ptr7216.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "21",
+      "pointLabel": "52.1.147.205",
+      "pointTitle": "address: 52.1.147.205",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "22",
+      "pointLabel": "zendesk2.discord.com",
+      "pointTitle": "subdomain: zendesk2.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "RapidDNS"
+    },
+    {
+      "node": "23",
+      "pointLabel": "149.72.251.68",
+      "pointTitle": "address: 149.72.251.68",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "24",
+      "pointLabel": "2a00:1450:4025:c03::1a",
+      "pointTitle": "address: 2a00:1450:4025:c03::1a",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "25",
+      "pointLabel": "149.72.228.0/24",
+      "pointTitle": "netblock: 149.72.228.0/24",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "26",
+      "pointLabel": "cloudflare.com",
+      "pointTitle": "domain: cloudflare.com",
+      "pointColor": 5,
+      "type": "domain",
+      "source": "DNS"
+    },
+    {
+      "node": "27",
+      "pointLabel": "52.4.175.111",
+      "pointTitle": "address: 52.4.175.111",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "28",
+      "pointLabel": "status.discord.com",
+      "pointTitle": "subdomain: status.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "29",
+      "pointLabel": "149.72.228.79",
+      "pointTitle": "address: 149.72.228.79",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "30",
+      "pointLabel": "printer.discord.com",
+      "pointTitle": "subdomain: printer.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "31",
+      "pointLabel": "35.237.4.214",
+      "pointTitle": "address: 35.237.4.214",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "32",
+      "pointLabel": "2a06:98c1:50::/46",
+      "pointTitle": "netblock: 2a06:98c1:50::/46",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "33",
+      "pointLabel": "162.158.0.0/15",
+      "pointTitle": "netblock: 162.158.0.0/15",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "34",
+      "pointLabel": "o18.ptr2300.discord.com",
+      "pointTitle": "subdomain: o18.ptr2300.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "35",
+      "pointLabel": "discord.com",
+      "pointTitle": "domain: discord.com",
+      "pointColor": 5,
+      "type": "domain",
+      "source": "DNS"
+    },
+    {
+      "node": "36",
+      "pointLabel": "sima.ns.cloudflare.com",
+      "pointTitle": "ns: sima.ns.cloudflare.com",
+      "pointColor": 0,
+      "type": "ns",
+      "source": "DNS"
+    },
+    {
+      "node": "37",
+      "pointLabel": "zendesk1.discord.com",
+      "pointTitle": "subdomain: zendesk1.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "RapidDNS"
+    },
+    {
+      "node": "38",
+      "pointLabel": "35.237.4.0/24",
+      "pointTitle": "netblock: 35.237.4.0/24",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "39",
+      "pointLabel": "crawl-35-237-4-214.ptr.discord.com",
+      "pointTitle": "subdomain: crawl-35-237-4-214.ptr.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "40",
+      "pointLabel": "11377",
+      "pointTitle": "as: 11377, Desc: SENDGRID - SendGrid, Inc.",
+      "pointColor": 1,
+      "type": "as",
+      "source": "RIR"
+    },
+    {
+      "node": "41",
+      "pointLabel": "108.162.192.0/20",
+      "pointTitle": "netblock: 108.162.192.0/20",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "42",
+      "pointLabel": "o19.ptr4192.discord.com",
+      "pointTitle": "subdomain: o19.ptr4192.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "43",
+      "pointLabel": "142.250.0.0/15",
+      "pointTitle": "netblock: 142.250.0.0/15",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "44",
+      "pointLabel": "149.72.251.0/24",
+      "pointTitle": "netblock: 149.72.251.0/24",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "45",
+      "pointLabel": "52.1.119.170",
+      "pointTitle": "address: 52.1.119.170",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "46",
+      "pointLabel": "52.4.240.221",
+      "pointTitle": "address: 52.4.240.221",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "47",
+      "pointLabel": "52.4.225.124",
+      "pointTitle": "address: 52.4.225.124",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "48",
+      "pointLabel": "162.159.128.7",
+      "pointTitle": "address: 162.159.128.7",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "49",
+      "pointLabel": "bugs.discord.com",
+      "pointTitle": "subdomain: bugs.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "50",
+      "pointLabel": "173.245.59.114",
+      "pointTitle": "address: 173.245.59.114",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "51",
+      "pointLabel": "149.72.170.116",
+      "pointTitle": "address: 149.72.170.116",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "52",
+      "pointLabel": "142.250.102.27",
+      "pointTitle": "address: 142.250.102.27",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "53",
+      "pointLabel": "142.250.150.27",
+      "pointTitle": "address: 142.250.150.27",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "54",
+      "pointLabel": "149.72.170.220",
+      "pointTitle": "address: 149.72.170.220",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "55",
+      "pointLabel": "35.196.132.85",
+      "pointTitle": "address: 35.196.132.85",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "56",
+      "pointLabel": "52.6.46.142",
+      "pointTitle": "address: 52.6.46.142",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "57",
+      "pointLabel": "zendesk.com",
+      "pointTitle": "domain: zendesk.com",
+      "pointColor": 5,
+      "type": "domain",
+      "source": "DNS"
+    },
+    {
+      "node": "58",
+      "pointLabel": "discordsafetyportal.zendesk.com",
+      "pointTitle": "subdomain: discordsafetyportal.zendesk.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "DNS"
+    },
+    {
+      "node": "59",
+      "pointLabel": "149.72.240.113",
+      "pointTitle": "address: 149.72.240.113",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "60",
+      "pointLabel": "173.245.58.0/23",
+      "pointTitle": "netblock: 173.245.58.0/23",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "61",
+      "pointLabel": "2a00:1450:400c::/48",
+      "pointTitle": "netblock: 2a00:1450:400c::/48",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "62",
+      "pointLabel": "35.196.132.0/24",
+      "pointTitle": "netblock: 35.196.132.0/24",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "63",
+      "pointLabel": "gabe.ns.cloudflare.com",
+      "pointTitle": "ns: gabe.ns.cloudflare.com",
+      "pointColor": 0,
+      "type": "ns",
+      "source": "DNS"
+    },
+    {
+      "node": "64",
+      "pointLabel": "2606:4700:50::adf5:3ade",
+      "pointTitle": "address: 2606:4700:50::adf5:3ade",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "65",
+      "pointLabel": "108.162.193.114",
+      "pointTitle": "address: 108.162.193.114",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "66",
+      "pointLabel": "www.discord.com",
+      "pointTitle": "subdomain: www.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "Crtsh"
+    },
+    {
+      "node": "67",
+      "pointLabel": "172.64.0.0/18",
+      "pointTitle": "netblock: 172.64.0.0/18",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "68",
+      "pointLabel": "o21.ptr6759.discord.com",
+      "pointTitle": "subdomain: o21.ptr6759.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "69",
+      "pointLabel": "172.64.33.114",
+      "pointTitle": "address: 172.64.33.114",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "70",
+      "pointLabel": "149.72.170.132",
+      "pointTitle": "address: 149.72.170.132",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "71",
+      "pointLabel": "52.6.3.192",
+      "pointTitle": "address: 52.6.3.192",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "72",
+      "pointLabel": "0",
+      "pointTitle": "as: 0, Desc: Unknown",
+      "pointColor": 1,
+      "type": "as",
+      "source": "RIR"
+    },
+    {
+      "node": "73",
+      "pointLabel": "52.0.16.118",
+      "pointTitle": "address: 52.0.16.118",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "74",
+      "pointLabel": "52.1.173.203",
+      "pointTitle": "address: 52.1.173.203",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "75",
+      "pointLabel": "14618",
+      "pointTitle": "as: 14618, Desc: AMAZON-AES - Amazon.com, Inc.",
+      "pointColor": 1,
+      "type": "as",
+      "source": "RIR"
+    },
+    {
+      "node": "76",
+      "pointLabel": "2607:f8b0:400e:c00::1b",
+      "pointTitle": "address: 2607:f8b0:400e:c00::1b",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "77",
+      "pointLabel": "149.72.158.236",
+      "pointTitle": "address: 149.72.158.236",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "78",
+      "pointLabel": "2803:f800:50::6ca2:c0de",
+      "pointTitle": "address: 2803:f800:50::6ca2:c0de",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "79",
+      "pointLabel": "162.159.138.6",
+      "pointTitle": "address: 162.159.138.6",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "80",
+      "pointLabel": "142.250.153.26",
+      "pointTitle": "address: 142.250.153.26",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "81",
+      "pointLabel": "mail3.zendesk.com",
+      "pointTitle": "subdomain: mail3.zendesk.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "DNS"
+    },
+    {
+      "node": "82",
+      "pointLabel": "2803:f800:50::/45",
+      "pointTitle": "netblock: 2803:f800:50::/45",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "83",
+      "pointLabel": "google.com",
+      "pointTitle": "domain: google.com",
+      "pointColor": 5,
+      "type": "domain",
+      "source": "DNS"
+    },
+    {
+      "node": "84",
+      "pointLabel": "162.159.128.0/22",
+      "pointTitle": "netblock: 162.159.128.0/22",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "85",
+      "pointLabel": "crawl-35-196-132-85.ptr.discord.com",
+      "pointTitle": "subdomain: crawl-35-196-132-85.ptr.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "86",
+      "pointLabel": "149.72.240.0/24",
+      "pointTitle": "netblock: 149.72.240.0/24",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "87",
+      "pointLabel": "i18n.discord.com",
+      "pointTitle": "subdomain: i18n.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "RapidDNS"
+    },
+    {
+      "node": "88",
+      "pointLabel": "13335",
+      "pointTitle": "as: 13335, Desc: CLOUDFLARENET - Cloudflare, Inc.",
+      "pointColor": 1,
+      "type": "as",
+      "source": "RIR"
+    },
+    {
+      "node": "89",
+      "pointLabel": "104.16.0.0/14",
+      "pointTitle": "netblock: 104.16.0.0/14",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "90",
+      "pointLabel": "o16.ptr7471.discord.com",
+      "pointTitle": "subdomain: o16.ptr7471.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "91",
+      "pointLabel": "108.162.192.222",
+      "pointTitle": "address: 108.162.192.222",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "92",
+      "pointLabel": "mail1.zendesk.com",
+      "pointTitle": "subdomain: mail1.zendesk.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "DNS"
+    },
+    {
+      "node": "93",
+      "pointLabel": "2a00:1450:4025::/48",
+      "pointTitle": "netblock: 2a00:1450:4025::/48",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "94",
+      "pointLabel": "149.72.170.0/24",
+      "pointTitle": "netblock: 149.72.170.0/24",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "95",
+      "pointLabel": "104.16.51.111",
+      "pointTitle": "address: 104.16.51.111",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "96",
+      "pointLabel": "162.159.135.232",
+      "pointTitle": "address: 162.159.135.232",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "97",
+      "pointLabel": "15169",
+      "pointTitle": "as: 15169, Desc: GOOGLE - Google LLC",
+      "pointColor": 1,
+      "type": "as",
+      "source": "RIR"
+    },
+    {
+      "node": "98",
+      "pointLabel": "142.250.142.26",
+      "pointTitle": "address: 142.250.142.26",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "99",
+      "pointLabel": "streamkit.discord.com",
+      "pointTitle": "subdomain: streamkit.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "RapidDNS"
+    },
+    {
+      "node": "100",
+      "pointLabel": "2a06:98c1:50::ac40:20de",
+      "pointTitle": "address: 2a06:98c1:50::ac40:20de",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "101",
+      "pointLabel": "2607:f8b0:4023::/48",
+      "pointTitle": "netblock: 2607:f8b0:4023::/48",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "102",
+      "pointLabel": "2606:4700:50::/44",
+      "pointTitle": "netblock: 2606:4700:50::/44",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "103",
+      "pointLabel": "198.21.6.65",
+      "pointTitle": "address: 198.21.6.65",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "104",
+      "pointLabel": "162.159.136.232",
+      "pointTitle": "address: 162.159.136.232",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "105",
+      "pointLabel": "149.72.150.171",
+      "pointTitle": "address: 149.72.150.171",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "106",
+      "pointLabel": "click.discord.com",
+      "pointTitle": "subdomain: click.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "107",
+      "pointLabel": "149.72.138.0/24",
+      "pointTitle": "netblock: 149.72.138.0/24",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "108",
+      "pointLabel": "mail4.zendesk.com",
+      "pointTitle": "subdomain: mail4.zendesk.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "DNS"
+    },
+    {
+      "node": "109",
+      "pointLabel": "198.21.0.0/21",
+      "pointTitle": "netblock: 198.21.0.0/21",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "110",
+      "pointLabel": "2a06:98c1:50::ac40:2172",
+      "pointTitle": "address: 2a06:98c1:50::ac40:2172",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "111",
+      "pointLabel": "2606:4700:58::adf5:3b72",
+      "pointTitle": "address: 2606:4700:58::adf5:3b72",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "112",
+      "pointLabel": "52.4.145.119",
+      "pointTitle": "address: 52.4.145.119",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "113",
+      "pointLabel": "192.254.112.0/20",
+      "pointTitle": "netblock: 192.254.112.0/20",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "114",
+      "pointLabel": "discorddevs.zendesk.com",
+      "pointTitle": "subdomain: discorddevs.zendesk.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "DNS"
+    },
+    {
+      "node": "115",
+      "pointLabel": "149.72.150.0/24",
+      "pointTitle": "netblock: 149.72.150.0/24",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "116",
+      "pointLabel": "162.159.137.232",
+      "pointTitle": "address: 162.159.137.232",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "117",
+      "pointLabel": "172.64.32.222",
+      "pointTitle": "address: 172.64.32.222",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "118",
+      "pointLabel": "zendesk3.discord.com",
+      "pointTitle": "subdomain: zendesk3.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "RapidDNS"
+    },
+    {
+      "node": "119",
+      "pointLabel": "crawl-35-227-62-178.ptr.discord.com",
+      "pointTitle": "subdomain: crawl-35-227-62-178.ptr.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "FullHunt"
+    },
+    {
+      "node": "120",
+      "pointLabel": "52.0.0.0/13",
+      "pointTitle": "netblock: 52.0.0.0/13",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "121",
+      "pointLabel": "2803:f800:50::6ca2:c172",
+      "pointTitle": "address: 2803:f800:50::6ca2:c172",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "122",
+      "pointLabel": "aspmx.l.google.com",
+      "pointTitle": "mx: aspmx.l.google.com",
+      "pointColor": 9,
+      "type": "mx",
+      "source": "DNS"
+    },
+    {
+      "node": "123",
+      "pointLabel": "149.72.158.0/24",
+      "pointTitle": "netblock: 149.72.158.0/24",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "124",
+      "pointLabel": "173.245.58.222",
+      "pointTitle": "address: 173.245.58.222",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "125",
+      "pointLabel": "support-dev.discord.com",
+      "pointTitle": "subdomain: support-dev.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "Crtsh"
+    },
+    {
+      "node": "126",
+      "pointLabel": "2607:f8b0:400e::/48",
+      "pointTitle": "netblock: 2607:f8b0:400e::/48",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "127",
+      "pointLabel": "o17.ptr8588.discord.com",
+      "pointTitle": "subdomain: o17.ptr8588.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "128",
+      "pointLabel": "alt1.aspmx.l.google.com",
+      "pointTitle": "mx: alt1.aspmx.l.google.com",
+      "pointColor": 9,
+      "type": "mx",
+      "source": "DNS"
+    },
+    {
+      "node": "129",
+      "pointLabel": "o22.ptr2763.discord.com",
+      "pointTitle": "subdomain: o22.ptr2763.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "Sublist3rAPI"
+    },
+    {
+      "node": "130",
+      "pointLabel": "35.227.62.178",
+      "pointTitle": "address: 35.227.62.178",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "131",
+      "pointLabel": "35.227.62.0/24",
+      "pointTitle": "netblock: 35.227.62.0/24",
+      "pointColor": 4,
+      "type": "netblock",
+      "source": "RIR"
+    },
+    {
+      "node": "132",
+      "pointLabel": "142.250.142.27",
+      "pointTitle": "address: 142.250.142.27",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "133",
+      "pointLabel": "ptb.discord.com",
+      "pointTitle": "subdomain: ptb.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "134",
+      "pointLabel": "162.159.138.232",
+      "pointTitle": "address: 162.159.138.232",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "135",
+      "pointLabel": "52.5.181.79",
+      "pointTitle": "address: 52.5.181.79",
+      "pointColor": 7,
+      "type": "address",
+      "source": "DNS"
+    },
+    {
+      "node": "136",
+      "pointLabel": "alt2.aspmx.l.google.com",
+      "pointTitle": "mx: alt2.aspmx.l.google.com",
+      "pointColor": 9,
+      "type": "mx",
+      "source": "DNS"
+    },
+    {
+      "node": "137",
+      "pointLabel": "o20.ptr1353.discord.com",
+      "pointTitle": "subdomain: o20.ptr1353.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "Sublist3rAPI"
+    },
+    {
+      "node": "138",
+      "pointLabel": "pax.discord.com",
+      "pointTitle": "subdomain: pax.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "BufferOver"
+    },
+    {
+      "node": "139",
+      "pointLabel": "zendesk4.discord.com",
+      "pointTitle": "subdomain: zendesk4.discord.com",
+      "pointColor": 3,
+      "type": "subdomain",
+      "source": "RapidDNS"
+    }
+  ]
+}

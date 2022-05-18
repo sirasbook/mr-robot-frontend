@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { Router, Route, Switch, useHistory } from "react-router-dom";
+import Request from "./request/request";
+import Report from "./reports/report";
+import ForceGraph from "./components/amass/force-graph";
+
+import data from "./data/data.json";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function App() {
+  const history = useHistory();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <Router history={history}>
+        <Switch>
+          <Route exact key="request" path="/" component={Request}></Route>
+          <Route exact key="report" path="/report" component={Report}></Route>
+          <Route exact key="test" path="/test">
+            <ForceGraph data={data} />
+          </Route>
+        </Switch>
+      </Router>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 

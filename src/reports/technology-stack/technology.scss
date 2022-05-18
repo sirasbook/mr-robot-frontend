@@ -1,0 +1,51 @@
+.tech-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 100px;
+    background-color: white;
+
+    table {
+        margin-top: 20px;
+        width: 40vw;
+    }
+
+    thead {
+        background-color: #F7ECD5;
+    }
+
+    tr {
+        border: 2px solid #B9B9B9;
+    }
+
+    th {
+        font-size: 22px;
+    }
+
+    td {
+        font-size: 20px;
+    }
+
+    h2 {
+        font-weight: 600;
+    }
+
+    a {
+        color: #442f17;
+        &:hover {
+            color: #ae8b63;
+        }
+    }
+
+    .contain {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .version {
+        font-size: 18px;
+        background-color: rgba(0,0,0,.07)!important;
+        border-radius: 20%;
+        padding: 2px 7px;
+    }
+}

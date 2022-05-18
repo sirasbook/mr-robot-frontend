@@ -1,0 +1,44 @@
+.leaked-container {
+    background-color: white;
+    padding: 30px 100px;
+
+    table {
+        margin-top: 20px;
+    }
+
+    thead {
+        background-color: #F7ECD5;
+    }
+
+    th {
+        font-size: 22px;
+        border: 2px solid #B9B9B9;
+    }
+
+    td {
+        font-size: 20px;
+        border: 2px solid #B9B9B9;
+    }
+
+    h2 {
+        font-weight: 600;
+    }
+
+    .no {
+        text-align: center;
+        width: 100px;
+    }
+
+    .total {
+        font-size: 22px;
+        color: red;
+        font-weight: 600;
+    }
+
+    a {
+        color: #442f17;
+        &:hover {
+            color: #ae8b63;
+        }
+    }
+}
